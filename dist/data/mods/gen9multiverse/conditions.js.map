@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9multiverse/conditions.ts"],
+  "sourcesContent": ["export const Conditions: {[k: string]: ConditionData} = {\r\n\tsilvally: {\r\n\t\tname: 'Silvally',\r\n\t\tonTypePriority: 1,\r\n\t\tonType(types, pokemon) {\r\n\t\t\tif (pokemon.transformed || pokemon.ability !== 'rkssystem' && this.gen >= 8) return types;\r\n\t\t\tlet type: string | undefined = 'Water';\r\n\t\t\tif (pokemon.ability === 'rkssystem') {\r\n\t\t\t\ttype = pokemon.getItem().onMemory;\r\n\t\t\t\tif (!type) {\r\n\t\t\t\t\ttype = 'Water';\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\treturn [type];\r\n\t\t},\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,aAA2C;AAAA,EACvD,UAAU;AAAA,IACT,MAAM;AAAA,IACN,gBAAgB;AAAA,IAChB,OAAO,OAAO,SAAS;AACtB,UAAI,QAAQ,eAAe,QAAQ,YAAY,eAAe,KAAK,OAAO;AAAG,eAAO;AACpF,UAAI,OAA2B;AAC/B,UAAI,QAAQ,YAAY,aAAa;AACpC,eAAO,QAAQ,QAAQ,EAAE;AACzB,YAAI,CAAC,MAAM;AACV,iBAAO;AAAA,QACR;AAAA,MACD;AACA,aAAO,CAAC,IAAI;AAAA,IACb;AAAA,EACD;AACD;",
+  "names": []
+}

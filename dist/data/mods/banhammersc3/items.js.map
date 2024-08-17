@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/banhammersc3/items.ts"],
+  "sourcesContent": ["export const Items: {[itemid: string]: ModdedItemData} = {\r\n\tboosterenergy: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n\tlightclay: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n\theavydutyboots: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n\tleftovers: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n\tfocussash: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n\tlifeorb: {\r\n\t\tinherit: true,\r\n\t\tisNonstandard: \"Past\",\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAA4C;AAAA,EACxD,eAAe;AAAA,IACd,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AAAA,EACA,WAAW;AAAA,IACV,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AAAA,EACA,gBAAgB;AAAA,IACf,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AAAA,EACA,WAAW;AAAA,IACV,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AAAA,EACA,WAAW;AAAA,IACV,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AAAA,EACA,SAAS;AAAA,IACR,SAAS;AAAA,IACT,eAAe;AAAA,EAChB;AACD;",
+  "names": []
+}

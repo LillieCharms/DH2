@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/toho/rulesets.ts"],
+  "sourcesContent": ["// Note: These are the rules that formats use\r\n// The list of formats is stored in config/formats.js\r\nexport const Rulesets: {[k: string]: ModdedFormatData} = {\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,MAAM,WAA4C,CACzD;",
+  "names": []
+}

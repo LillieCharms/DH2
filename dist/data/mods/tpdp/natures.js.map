@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/tpdp/natures.ts"],
+  "sourcesContent": ["export const Natures: {[k: string]: NatureData} = {\r\n\tred: {\r\n\t\tname: \"Red\",\r\n\t\tplus: \"atk\"\r\n\t},\r\n\tblue: {\r\n\t\tname: \"Blue\",\r\n\t\tplus: \"def\"\r\n\t},\r\n\tblack: {\r\n\t\tname: \"Black\",\r\n\t\tplus: \"spa\"\r\n\t},\r\n\twhite: {\r\n\t\tname: \"White\",\r\n\t\tplus: \"spd\"\r\n\t},\r\n\tgreen: {\r\n\t\tname: \"Green\",\r\n\t\tplus: \"spe\"\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAqC;AAAA,EACjD,KAAK;AAAA,IACJ,MAAM;AAAA,IACN,MAAM;AAAA,EACP;AAAA,EACA,MAAM;AAAA,IACL,MAAM;AAAA,IACN,MAAM;AAAA,EACP;AAAA,EACA,OAAO;AAAA,IACN,MAAM;AAAA,IACN,MAAM;AAAA,EACP;AAAA,EACA,OAAO;AAAA,IACN,MAAM;AAAA,IACN,MAAM;AAAA,EACP;AAAA,EACA,OAAO;AAAA,IACN,MAAM;AAAA,IACN,MAAM;AAAA,EACP;AACD;",
+  "names": []
+}

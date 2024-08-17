@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9ubermons/scripts.ts"],
+  "sourcesContent": ["export const Scripts: {[k: string]: ModdedBattleScriptsData} = {};"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAkD,CAAC;",
+  "names": []
+}

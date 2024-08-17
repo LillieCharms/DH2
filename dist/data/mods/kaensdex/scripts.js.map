@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/kaensdex/scripts.ts"],
+  "sourcesContent": ["export const Scripts: {[k: string]: ModdedBattleScriptsData} = {\r\n\tteambuilderConfig: {\r\n\t\texcludeStandardTiers: true,\r\n\t\tcustomTiers: [\"KaensDex\"],\r\n\t\tcustomDoublesTiers: [\"KDD\"],\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAkD;AAAA,EAC9D,mBAAmB;AAAA,IAClB,sBAAsB;AAAA,IACtB,aAAa,CAAC,UAAU;AAAA,IACxB,oBAAoB,CAAC,KAAK;AAAA,EAC3B;AACD;",
+  "names": []
+}

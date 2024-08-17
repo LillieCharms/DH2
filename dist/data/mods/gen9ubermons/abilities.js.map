@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9ubermons/abilities.ts"],
+  "sourcesContent": ["export const Abilities: {[k: string]: ModdedAbilityData} = {};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,YAA8C,CAAC;",
+  "names": []
+}

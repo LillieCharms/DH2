@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/genxdesvega/aliases.ts"],
+  "sourcesContent": ["export const Aliases: {[alias: string]: string} = {\r\n\tstickbug: \"Stickler\",\r\n\tpolybius: \"Arcognition\",\r\n\tzaza: \"Tapu Zaza\",\r\n\tcrayoctred: \"Crayoct\",\r\n\tcrayoctblue: \"Crayoct\",\r\n\tcrayoctyellow: \"Crayoct\",\r\n\tcrayoctpink: \"Crayoct\",\r\n\tcrayoctbrown: \"Crayoct\",\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAqC;AAAA,EACjD,UAAU;AAAA,EACV,UAAU;AAAA,EACV,MAAM;AAAA,EACN,YAAY;AAAA,EACZ,aAAa;AAAA,EACb,eAAe;AAAA,EACf,aAAa;AAAA,EACb,cAAc;AACf;",
+  "names": []
+}

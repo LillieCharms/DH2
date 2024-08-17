@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/mavmons/formats-data.ts"],
+  "sourcesContent": ["export const FormatsData: {[k: string]: SpeciesFormatsData} = {\r\n\tmrbeast: {\r\n\t\ttier: \"MV OU\",\r\n\t\tdoublesTier: \"DMV OU\",\r\n\t},\r\n\t\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAiD;AAAA,EAC7D,SAAS;AAAA,IACR,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAED;",
+  "names": []
+}

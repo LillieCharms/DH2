@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/m4ag9/formats-data.ts"],
+  "sourcesContent": ["export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {\r\n\t// think we learned this was necessary as a bugfix\r\n\tdarmanitanzen: {},\r\n\tmimikyubusted: {},\r\n\tcramorantgulping: {},\r\n\tcramorantgorging: {},\r\n\tsinisteaantique: {},\r\n\tpolteageistantique: {},\r\n\teiscuenoice: {},\r\n\tmorpekohangry: {},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAuD;AAAA;AAAA,EAEnE,eAAe,CAAC;AAAA,EAChB,eAAe,CAAC;AAAA,EAChB,kBAAkB,CAAC;AAAA,EACnB,kBAAkB,CAAC;AAAA,EACnB,iBAAiB,CAAC;AAAA,EAClB,oBAAoB,CAAC;AAAA,EACrB,aAAa,CAAC;AAAA,EACd,eAAe,CAAC;AACjB;",
+  "names": []
+}

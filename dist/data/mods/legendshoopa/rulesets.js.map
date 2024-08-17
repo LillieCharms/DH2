@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/legendshoopa/rulesets.ts"],
+  "sourcesContent": ["export const Rulesets: {[k: string]: ModdedFormatData} = {\r\n\tlegendsboostsmod: {\r\n\t\teffectType: 'Rule',\r\n\t\tname: 'Legends Boosts Mod',\r\n\t\tdesc: \"Applies Legends: Arceus' stat boost mechanics.\",\r\n\t\t// banlist: [],\r\n\t\t/*\r\n\t\tonBegin() {\r\n\t\t\tthis.add('rule', \"Legends Boost Mod: Stat changes imitate Legends: Arceus's!\");\r\n\t\t},\r\n\t\t*/\r\n\t\tonSwap(pokemon) {\r\n\t\t\tpokemon.addVolatile('legendsboost');\r\n\t\t},\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,WAA4C;AAAA,EACxD,kBAAkB;AAAA,IACjB,YAAY;AAAA,IACZ,MAAM;AAAA,IACN,MAAM;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,IAON,OAAO,SAAS;AACf,cAAQ,YAAY,cAAc;AAAA,IACnC;AAAA,EACD;AACD;",
+  "names": []
+}

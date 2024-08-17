@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/chaoschaoschaos/rulesets.ts"],
+  "sourcesContent": ["export const Rulesets: {[k: string]: ModdedFormatsData} = {\r\n\tstandardpetmod: {\r\n\t\tinherit: true,\r\n\t\truleset: ['[Gen 8] OU', '!Species Clause'],\r\n\t\tbanlist: ['All Pokemon'],\r\n\t\tonBegin() {\r\n\t\t\t// The only validator rule this currently modifies is Species Clause, so the added rule is just this\r\n\t\t\tthis.add('rule', 'Chaos Chaos Chaos: Limit one of each Pok\u00E9mon');\r\n\t\t},\r\n\t\tonValidateTeam(team, format) {\r\n\t\t\t/** @type {{[k: string]: true}} */\r\n\t\t\tconst speciesTable = {};\r\n\t\t\tfor (const set of team) {\r\n\t\t\t\tconst template = this.getTemplate(set.species);\r\n\t\t\t\tif (speciesTable[template.species]) {\r\n\t\t\t\t\treturn [\"You are limited to one of each Pok\u00E9mon by Chaos Chaos Chaos.\", \"(You have more than one \" + template.species + \")\"];\r\n\t\t\t\t}\r\n\t\t\t\tspeciesTable[template.species] = true;\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,WAA6C;AAAA,EACzD,gBAAgB;AAAA,IACf,SAAS;AAAA,IACT,SAAS,CAAC,cAAc,iBAAiB;AAAA,IACzC,SAAS,CAAC,aAAa;AAAA,IACvB,UAAU;AAET,WAAK,IAAI,QAAQ,iDAA8C;AAAA,IAChE;AAAA,IACA,eAAe,MAAM,QAAQ;AAE5B,YAAM,eAAe,CAAC;AACtB,iBAAW,OAAO,MAAM;AACvB,cAAM,WAAW,KAAK,YAAY,IAAI,OAAO;AAC7C,YAAI,aAAa,SAAS,OAAO,GAAG;AACnC,iBAAO,CAAC,mEAAgE,6BAA6B,SAAS,UAAU,GAAG;AAAA,QAC5H;AACA,qBAAa,SAAS,OAAO,IAAI;AAAA,MAClC;AAAA,IACD;AAAA,EACD;AACD;",
+  "names": []
+}

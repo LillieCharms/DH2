@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen1rbycap/scripts.ts"],
+  "sourcesContent": ["export const Scripts: ModdedBattleScriptsData = {\r\n  gen: 1,\r\n\tinherit: 'gen1',\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAmC;AAAA,EAC9C,KAAK;AAAA,EACN,SAAS;AACV;",
+  "names": []
+}

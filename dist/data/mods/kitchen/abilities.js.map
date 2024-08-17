@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/kitchen/abilities.ts"],
+  "sourcesContent": ["export const Abilities: {[k: string]: ModdedAbilityData} = {\r\n\tsprinter: {\r\n        onBasePowerPriority: 21,\r\n        onBasePower(basePower, attacker, defender, move) {\r\n            if (attacker.activeMoveActions <= 1) {\r\n                return this.chainModify([1.5]);\r\n            }\r\n        },\r\n        name: \"Sprinter\",\r\n        shortDesc: \"This Pokemon deals 1.5x damage with it's first move on the field.\",\r\n        rating: 3.5,\r\n        num: 1000,\r\n\t}\r\n}"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,YAA8C;AAAA,EAC1D,UAAU;AAAA,IACH,qBAAqB;AAAA,IACrB,YAAY,WAAW,UAAU,UAAU,MAAM;AAC7C,UAAI,SAAS,qBAAqB,GAAG;AACjC,eAAO,KAAK,YAAY,CAAC,GAAG,CAAC;AAAA,MACjC;AAAA,IACJ;AAAA,IACA,MAAM;AAAA,IACN,WAAW;AAAA,IACX,QAAQ;AAAA,IACR,KAAK;AAAA,EACZ;AACD;",
+  "names": []
+}

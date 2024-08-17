@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/asodh/conditions.ts"],
+  "sourcesContent": ["export const Conditions: {[k: string]: ConditionData} = {\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,aAA2C,CACxD;",
+  "names": []
+}

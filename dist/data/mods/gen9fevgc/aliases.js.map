@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9fevgc/aliases.ts"],
+  "sourcesContent": ["export const Aliases: {[alias: string]: string} = {\r\n\tmegaflorred: \"Megaflor\",\r\n\tmegaflorblue: \"Megaflor\",\r\n\tmegafloryellow: \"Megaflor\",\r\n\tmegaflororange: \"Megaflor\",\r\n\tmegaflorwhite: \"Megaflor\",\r\n\tchikobebered: \"Chikobebe\",\r\n\tchikobebeblue: \"Chikobebe\",\r\n\tchikobebeyellow: \"Chikobebe\",\r\n\tchikobebeorange: \"Chikobebe\",\r\n\tchikobebewhite: \"Chikobebe\",\r\n\tfloeleefred: \"Floeleef\",\r\n\tfloeleefblue: \"Floeleef\",\r\n\tfloeleefyellow: \"Floeleef\",\r\n\tfloeleeforange: \"Floeleef\",\r\n\tfloeleefwhite: \"Floeleef\",\r\n\ttoxtricorioampedpompom: \"Toxtricorio\",\r\n\tsamureedeem: \"Samureedee\",\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAqC;AAAA,EACjD,aAAa;AAAA,EACb,cAAc;AAAA,EACd,gBAAgB;AAAA,EAChB,gBAAgB;AAAA,EAChB,eAAe;AAAA,EACf,cAAc;AAAA,EACd,eAAe;AAAA,EACf,iBAAiB;AAAA,EACjB,iBAAiB;AAAA,EACjB,gBAAgB;AAAA,EAChB,aAAa;AAAA,EACb,cAAc;AAAA,EACd,gBAAgB;AAAA,EAChB,gBAAgB;AAAA,EAChB,eAAe;AAAA,EACf,wBAAwB;AAAA,EACxB,aAAa;AACd;",
+  "names": []
+}

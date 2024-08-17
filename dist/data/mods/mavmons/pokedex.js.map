@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/mavmons/pokedex.ts"],
+  "sourcesContent": ["export const Pokedex: {[k: string]: ModdedSpeciesData} = {\r\n\tmrbeast: {\r\n\t\tnum: 1,\r\n\t\tname: \"<Mr Beast>\",\r\n\t\ttypes: [\"Normal\"],\r\n\t\tgender: \"M\",\r\n\t\tbaseStats: {hp: 70, atk: 105, def: 78, spa: 78, spd: 94, spe: 107},\r\n\t\tabilities: {0: \"Overgrow\", H: \"Regenerator\"},\r\n\t\tweightkg: 85,\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAA4C;AAAA,EACxD,SAAS;AAAA,IACR,KAAK;AAAA,IACL,MAAM;AAAA,IACN,OAAO,CAAC,QAAQ;AAAA,IAChB,QAAQ;AAAA,IACR,WAAW,EAAC,IAAI,IAAI,KAAK,KAAK,KAAK,IAAI,KAAK,IAAI,KAAK,IAAI,KAAK,IAAG;AAAA,IACjE,WAAW,EAAC,GAAG,YAAY,GAAG,cAAa;AAAA,IAC3C,UAAU;AAAA,EACX;AACD;",
+  "names": []
+}

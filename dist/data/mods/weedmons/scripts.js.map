@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/weedmons/scripts.ts"],
+  "sourcesContent": ["export const Scripts: {[k: string]: ModdedBattleScriptsData} = {\r\n\tgen: 9,\r\n\r\n\tteambuilderConfig: {\r\n\t\t// for micrometas to only show custom tiers\r\n\t\texcludeStandardTiers: true,\r\n\t\t// only to specify the order of custom tiers\r\n\t\tcustomTiers: ['Weedmons', 'Weedmons NFE', 'Weedmons LC'],\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAkD;AAAA,EAC9D,KAAK;AAAA,EAEL,mBAAmB;AAAA;AAAA,IAElB,sBAAsB;AAAA;AAAA,IAEtB,aAAa,CAAC,YAAY,gBAAgB,aAAa;AAAA,EACxD;AACD;",
+  "names": []
+}

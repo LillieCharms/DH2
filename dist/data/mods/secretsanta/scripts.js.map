@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/secretsanta/scripts.ts"],
+  "sourcesContent": ["export const Scripts: {[k: string]: ModdedBattleScriptsData} = {\r\n\tgen: 9,\r\n\tteambuilderConfig: {\r\n\t\texcludeStandardTiers: true,\r\n   },\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAkD;AAAA,EAC9D,KAAK;AAAA,EACL,mBAAmB;AAAA,IAClB,sBAAsB;AAAA,EACrB;AACH;",
+  "names": []
+}

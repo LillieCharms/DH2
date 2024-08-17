@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/kitchen/formats-data.ts"],
+  "sourcesContent": ["export const FormatsData: {[k: string]: SpeciesFormatsData} = {\r\n\t\r\n\tathleetah: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"OU\",\r\n\t},\r\n};"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAiD;AAAA,EAE7D,WAAW;AAAA,IACV,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AACD;",
+  "names": []
+}

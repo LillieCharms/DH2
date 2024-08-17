@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9ubermons/moves.ts"],
+  "sourcesContent": ["export const Moves: {[k: string]: ModdedMoveData} = {};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAAuC,CAAC;",
+  "names": []
+}

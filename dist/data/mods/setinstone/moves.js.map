@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/setinstone/moves.ts"],
+  "sourcesContent": ["export const Moves: {[moveid: string]: MoveData} = {\r\n\tshortcircuit: {\r\n\t\tnum: -1,\r\n\t\taccuracy: 100,\r\n\t\tbasePower: 65,\r\n\t\tcategory: \"Physical\",\r\n\t\tname: \"Short Circuit\",\r\n\t\tshortDesc: \"Doubles in power if the target is paralyzed.\",\r\n\t\tpp: 15,\r\n\t\tpriority: 0,\r\n\t\tflags: {protect: 1, mirror: 1},\r\n\t\tonBasePower(basePower, pokemon, target) {\r\n\t\t\tif (target.status === 'par') {\r\n\t\t\t\treturn this.chainModify(2);\r\n\t\t\t}\r\n\t\t},\r\n\t\tsecondary: null,\r\n\t\ttarget: \"normal\",\r\n\t\ttype: \"Electric\",\r\n\t},\r\n};"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAAsC;AAAA,EAClD,cAAc;AAAA,IACb,KAAK;AAAA,IACL,UAAU;AAAA,IACV,WAAW;AAAA,IACX,UAAU;AAAA,IACV,MAAM;AAAA,IACN,WAAW;AAAA,IACX,IAAI;AAAA,IACJ,UAAU;AAAA,IACV,OAAO,EAAC,SAAS,GAAG,QAAQ,EAAC;AAAA,IAC7B,YAAY,WAAW,SAAS,QAAQ;AACvC,UAAI,OAAO,WAAW,OAAO;AAC5B,eAAO,KAAK,YAAY,CAAC;AAAA,MAC1B;AAAA,IACD;AAAA,IACA,WAAW;AAAA,IACX,QAAQ;AAAA,IACR,MAAM;AAAA,EACP;AACD;",
+  "names": []
+}

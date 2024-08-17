@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/asodh/pokedex.ts"],
+  "sourcesContent": ["export const Pokedex: { [k: string]: ModdedSpeciesData } = {\r\n\tstonjourner: {\r\n\t\tinherit: true,\r\n\t\totherFormes: [\"Stonjourner-Mega\"],\r\n\t\tformeOrder: [\"Stonjourner\", \"Stonjourner-Mega\"],\r\n\t},\r\n\tstonjournermega: {\r\n\t\tnum: 874,\r\n\t\tname: \"Stonjourner-Mega\",\r\n\t\tbaseSpecies: \"Stonjourner\",\r\n\t\tforme: \"Mega\",\r\n\t\ttypes: [\"Rock\"],\r\n\t\tbaseStats: {hp: 100, atk: 125, def: 135, spa: 20, spd: 20, spe: 70},\r\n\t\tabilities: {0: \"Cosmic Energy\"},\r\n\t\theightm: 2.5,\r\n\t\tweightkg: 520,\r\n\t\tcolor: \"Gray\",\r\n\t\teggGroups: [\"Mineral\"],\r\n\t\trequiredItem: \"Stonjournerite\",\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAA8C;AAAA,EAC1D,aAAa;AAAA,IACZ,SAAS;AAAA,IACT,aAAa,CAAC,kBAAkB;AAAA,IAChC,YAAY,CAAC,eAAe,kBAAkB;AAAA,EAC/C;AAAA,EACA,iBAAiB;AAAA,IAChB,KAAK;AAAA,IACL,MAAM;AAAA,IACN,aAAa;AAAA,IACb,OAAO;AAAA,IACP,OAAO,CAAC,MAAM;AAAA,IACd,WAAW,EAAC,IAAI,KAAK,KAAK,KAAK,KAAK,KAAK,KAAK,IAAI,KAAK,IAAI,KAAK,GAAE;AAAA,IAClE,WAAW,EAAC,GAAG,gBAAe;AAAA,IAC9B,SAAS;AAAA,IACT,UAAU;AAAA,IACV,OAAO;AAAA,IACP,WAAW,CAAC,SAAS;AAAA,IACrB,cAAc;AAAA,EACf;AACD;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/emamod/abilities.ts"],
+  "sourcesContent": ["export const Abilities: {[abilityid: string]: AbilityData} = {\r\n\tdamp: {\r\n\t\tonAnyTryMove(target, source, effect) {\r\n\t\t\tif (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct', 'chloroblast'].includes(effect.id)) {\r\n\t\t\t\tthis.attrLastMove('[still]');\r\n\t\t\t\tthis.add('cant', this.effectState.target, 'ability: Damp', effect, '[of] ' + target);\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t},\r\n\t\tinherit: true,\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,YAAgD;AAAA,EAC5D,MAAM;AAAA,IACL,aAAa,QAAQ,QAAQ,QAAQ;AACpC,UAAI,CAAC,aAAa,aAAa,kBAAkB,gBAAgB,aAAa,EAAE,SAAS,OAAO,EAAE,GAAG;AACpG,aAAK,aAAa,SAAS;AAC3B,aAAK,IAAI,QAAQ,KAAK,YAAY,QAAQ,iBAAiB,QAAQ,UAAU,MAAM;AACnF,eAAO;AAAA,MACR;AAAA,IACD;AAAA,IACA,SAAS;AAAA,EACV;AACD;",
+  "names": []
+}

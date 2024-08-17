@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/kitchen/pokedex.ts"],
+  "sourcesContent": ["export const Pokedex: {[k: string]: ModdedSpeciesData} = {\r\n\r\n\tathleetah: {\r\n        num: 3002,\r\n        name: \"Athleetah\",\r\n        types: [\"Normal\", \"Ground\"],\r\n        baseStats: {hp: 65, atk: 80, def: 65, spa: 65, spd: 65, spe: 145},\r\n        abilities: {0: \"Sprinter\", 1: \"Limber\", H: \"Quick Feet\"},\r\n        heightm: 1.6,\r\n        weightkg: 45,\r\n        color: \"Yellow\",\r\n        eggGroups: [\"Field\", \"Human-Like\"],\r\n        gen: 8,\r\n    },\r\n\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAA4C;AAAA,EAExD,WAAW;AAAA,IACJ,KAAK;AAAA,IACL,MAAM;AAAA,IACN,OAAO,CAAC,UAAU,QAAQ;AAAA,IAC1B,WAAW,EAAC,IAAI,IAAI,KAAK,IAAI,KAAK,IAAI,KAAK,IAAI,KAAK,IAAI,KAAK,IAAG;AAAA,IAChE,WAAW,EAAC,GAAG,YAAY,GAAG,UAAU,GAAG,aAAY;AAAA,IACvD,SAAS;AAAA,IACT,UAAU;AAAA,IACV,OAAO;AAAA,IACP,WAAW,CAAC,SAAS,YAAY;AAAA,IACjC,KAAK;AAAA,EACT;AAEJ;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen9ubermons/items.ts"],
+  "sourcesContent": ["export const Items: {[itemid: string]: ModdedItemData} = {};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAA4C,CAAC;",
+  "names": []
+}

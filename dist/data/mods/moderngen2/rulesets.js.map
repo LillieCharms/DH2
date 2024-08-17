@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/moderngen2/rulesets.ts"],
+  "sourcesContent": ["export const Rulesets: {[k: string]: ModdedFormatData} = {\r\n\tstandard: {\r\n\t\teffectType: 'ValidatorRule',\r\n\t\tname: 'Standard',\r\n\t\truleset: ['Obtainable', 'Sleep Clause Mod', 'Freeze Clause Mod', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Evasion Items Clause', 'Evasion Moves Clause', 'Endless battle Clause', 'HP Percentage Mod', 'Cancel Mod'],\r\n\t\tbanlist: [\r\n\t\t\t'Hypnosis + Mean Look',\r\n\t\t\t'Hypnosis + Spider Web',\r\n\t\t\t'Lovely Kiss + Mean Look',\r\n\t\t\t'Lovely Kiss + Spider Web',\r\n\t\t\t'Sing + Mean Look',\r\n\t\t\t'Sing + Spider Web',\r\n\t\t\t'Sleep Powder + Mean Look',\r\n\t\t\t'Sleep Powder + Spider Web',\r\n\t\t\t'Spore + Mean Look',\r\n\t\t\t'Spore + Spider Web',\r\n\t\t],\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,WAA4C;AAAA,EACxD,UAAU;AAAA,IACT,YAAY;AAAA,IACZ,MAAM;AAAA,IACN,SAAS,CAAC,cAAc,oBAAoB,qBAAqB,kBAAkB,mBAAmB,eAAe,wBAAwB,wBAAwB,yBAAyB,qBAAqB,YAAY;AAAA,IAC/N,SAAS;AAAA,MACR;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,IACD;AAAA,EACD;AACD;",
+  "names": []
+}

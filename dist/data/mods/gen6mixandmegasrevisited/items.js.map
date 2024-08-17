@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen6mixandmegasrevisited/items.ts"],
+  "sourcesContent": ["export const Items: {[itemid: string]: ModdedItemData} = {\r\n\tmeteorite: {\r\n\t\tname: \"Meteorite\",\r\n\t\tspritenum: 615,\r\n\t\tmegaStone: \"Rayquaza-Mega\",\r\n\t\tmegaEvolves: \"Rayquaza\",\r\n\t\titemUser: [\"Rayquaza\"],\r\n\t\tonTakeItem(item, source) {\r\n\t\t\tif (item.megaEvolves === source.baseSpecies.baseSpecies) return false;\r\n\t\t\treturn true;\r\n\t\t},\r\n\t\tdesc: \"If held by a Rayquaza, this item allows it to Mega Evolve in battle.\",\r\n\t},\t\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAA4C;AAAA,EACxD,WAAW;AAAA,IACV,MAAM;AAAA,IACN,WAAW;AAAA,IACX,WAAW;AAAA,IACX,aAAa;AAAA,IACb,UAAU,CAAC,UAAU;AAAA,IACrB,WAAW,MAAM,QAAQ;AACxB,UAAI,KAAK,gBAAgB,OAAO,YAAY;AAAa,eAAO;AAChE,aAAO;AAAA,IACR;AAAA,IACA,MAAM;AAAA,EACP;AACD;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/gen3uuhoenngaiden/scripts.ts"],
+  "sourcesContent": ["import { learnsetUpdate } from \"../gen3hoenngaiden/learnsetupdate\";\r\n\r\nexport const Scripts: ModdedBattleScriptsData = {\r\n\tinherit: 'gen3hoenngaiden',\r\n\tgen: 3,\r\n\r\n\tteambuilderConfig: {},\r\n\r\n\tinit() {\r\n\t\tfor (const i in this.data.Pokedex) {\r\n\t\t\tdelete this.data.Pokedex[i].abilities['H'];\r\n\t\t}\r\n\t\tlearnsetUpdate(this);\r\n\t}\r\n};\r\n\r\n\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,4BAA+B;AAExB,MAAM,UAAmC;AAAA,EAC/C,SAAS;AAAA,EACT,KAAK;AAAA,EAEL,mBAAmB,CAAC;AAAA,EAEpB,OAAO;AACN,eAAW,KAAK,KAAK,KAAK,SAAS;AAClC,aAAO,KAAK,KAAK,QAAQ,CAAC,EAAE,UAAU,GAAG;AAAA,IAC1C;AACA,8CAAe,IAAI;AAAA,EACpB;AACD;",
+  "names": []
+}

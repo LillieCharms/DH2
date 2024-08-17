@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/asodh/moves.ts"],
+  "sourcesContent": ["export const Moves: { [moveid: string]: ModdedMoveData } = {\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAA8C,CAC3D;",
+  "names": []
+}

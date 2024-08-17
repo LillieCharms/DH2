@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/pokemorty/conditions.ts"],
+  "sourcesContent": ["export const Conditions: {[k: string]: ModdedConditionData} = {\r\n\tpar: {\r\n\t\tinherit: true,\r\n\t\tonModifySpe() {},\r\n\t\tonBeforeMove(pokemon) {\r\n\t\t\tif (this.randomChance(1, 7)) {\r\n\t\t\t\tthis.add('cant', pokemon, 'par');\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tpsn: {\r\n\t\tinherit: true,\r\n\t\tonResidual(pokemon) {\r\n\t\t\tthis.damage(pokemon.baseMaxhp / 10);\r\n\t\t},\r\n\t},\r\n}\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,aAAiD;AAAA,EAC7D,KAAK;AAAA,IACJ,SAAS;AAAA,IACT,cAAc;AAAA,IAAC;AAAA,IACf,aAAa,SAAS;AACrB,UAAI,KAAK,aAAa,GAAG,CAAC,GAAG;AAC5B,aAAK,IAAI,QAAQ,SAAS,KAAK;AAC/B,eAAO;AAAA,MACR;AAAA,IACD;AAAA,EACD;AAAA,EACA,KAAK;AAAA,IACJ,SAAS;AAAA,IACT,WAAW,SAAS;AACnB,WAAK,OAAO,QAAQ,YAAY,EAAE;AAAA,IACnC;AAAA,EACD;AACD;",
+  "names": []
+}

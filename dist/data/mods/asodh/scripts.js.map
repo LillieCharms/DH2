@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/asodh/scripts.ts"],
+  "sourcesContent": ["export const Scripts: ModdedBattleScriptsData = {\r\n\tgen: 9,\r\n\tteambuilderConfig: {\r\n\t\texcludeStandardTiers: true,\r\n\t\tcustomTiers: ['ASODH', 'ASODH NFE', 'ASODH Ubers'],\r\n\t\tcustomDoublesTiers: ['ASODH', 'ASODH NFE', 'ASODH Ubers'],\r\n\t},\r\n\tinit() {\r\n\t  this.modData('Learnsets', 'stonjourner').learnset.zenheadbutt = ['9M'];\r\n\t  this.modData('Learnsets', 'stonjourner').learnset.psychic = ['9M'];\r\n\t}\r\n  };\r\n  "],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,UAAmC;AAAA,EAC/C,KAAK;AAAA,EACL,mBAAmB;AAAA,IAClB,sBAAsB;AAAA,IACtB,aAAa,CAAC,SAAS,aAAa,aAAa;AAAA,IACjD,oBAAoB,CAAC,SAAS,aAAa,aAAa;AAAA,EACzD;AAAA,EACA,OAAO;AACL,SAAK,QAAQ,aAAa,aAAa,EAAE,SAAS,cAAc,CAAC,IAAI;AACrE,SAAK,QAAQ,aAAa,aAAa,EAAE,SAAS,UAAU,CAAC,IAAI;AAAA,EACnE;AACC;",
+  "names": []
+}

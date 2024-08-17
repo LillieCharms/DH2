@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../data/mods/blackmarket/formats-data.ts"],
+  "sourcesContent": ["export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {\r\n\tperdemos1anaconja: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n\tperdemos3anaconja: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n\tperdemos2anaconja: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n\tvailaflygravitymonkey: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n\tkomodoregravitymonkey: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n\tcutternalgravitymonkey: {\r\n\t\ttier: \"OU\",\r\n\t\tdoublesTier: \"DOU\",\r\n\t},\r\n};\r\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAuD;AAAA,EACnE,mBAAmB;AAAA,IAClB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,mBAAmB;AAAA,IAClB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,mBAAmB;AAAA,IAClB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,uBAAuB;AAAA,IACtB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,uBAAuB;AAAA,IACtB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,wBAAwB;AAAA,IACvB,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AACD;",
+  "names": []
+}
