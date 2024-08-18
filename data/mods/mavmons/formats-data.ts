@@ -1,5 +1,5 @@
 export const FormatsData: {[k: string]: SpeciesFormatsData} = {
-	mrbeast: {
+	charms: {
 		tier: "MV OU",
 		doublesTier: "DMV OU",
 	},
