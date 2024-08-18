@@ -29,13 +29,13 @@ export const Formats: FormatList = [
 	{
 		name: "[Gen 9] Maverick* Mons",
 		desc: `Maverick* Mons, a micrometa designed to use Maverick* Server Fakemons.`,
-		mod: 'gen9crossoverchaos',
+		mod: 'mavmons',
 		teambuilderFormat: "National Dex",
 		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Terastal Clause', /* 'Mega Data Mod' */],
 		onValidateTeam(team, format) {
 			/**@type {{[k: string]: true}}*/
 			let speciesTable = {};
-			let allowedTiers = ['MV OU', 'MV UU'];
+			let allowedTiers = ['MV Ubers, Natdex Ubers'];
 			for (const set of team) {
 				let template = this.dex.species.get(set.species);
 				if (!allowedTiers.includes(template.tier)) {
