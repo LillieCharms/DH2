@@ -11,7 +11,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "MV Ubers",
 		doublesTier: "DMV Ubers",
 	},
-	benmode {
+	benmode: {
 		tier: "MV Ubers",
 		doublesTier: "DMV Ubers",
 	},
