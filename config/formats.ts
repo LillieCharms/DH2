@@ -31,18 +31,18 @@ export const Formats: FormatList = [
 		desc: `Maverick* Mons, a micrometa designed to use Maverick* Server Fakemons.`,
 		mod: 'mavmons',
 		teambuilderFormat: "National Dex",
-		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Terastal Clause', /* 'Mega Data Mod' */],
+		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Sleep Clause Mod', 'Terastal Clause', /* 'Mega Data Mod' */],
+		unbanlist: ['Charms']
 		onValidateTeam(team, format) {
-			/**@type {{[k: string]: true}}*/
-			let speciesTable = {};
-			let allowedTiers = ['MV Ubers, Natdex Ubers, OU, MV OU, MV UU'];
-			for (const set of team) {
-				let template = this.dex.species.get(set.species);
-				if (!allowedTiers.includes(template.tier)) {
-					return [set.species + ' is not legal in Maverick* Mons Gen 9.'];
-				}
-			}
-		},
+            let speciesTable = {};
+            let allowedTiers = ['MV Ubers, OU, Ubers'];
+            for (const set of team) {
+                let template = this.dex.species.get(set.species);
+                if (template.tier !== 'MV Ubers, OU, Ubers') {
+                    return [set.species + ' is not legal in [Gen 9] Maverick* Mons.'];
+                }
+            }
+        },
 	},
 	{
 		name: "[Gen 9] Alternatium EX",
