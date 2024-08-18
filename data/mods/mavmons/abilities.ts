@@ -24,27 +24,29 @@ Ratings and how they work:
 */
 
 export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
-	adeptprowess: {
-		shortDesc: "Gains secondary type based on held berry. Psy Blast doesn't consume berry.",
+	starstruckveil: {
+		shortDesc: "This Pokemon heals 1/4 of its max HP when hit by a Fire move; Fire Immunity. When hit by a Dark-type move raise this Pokemon's Special Attack by 1. Ignore other abilities.",
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Fire') {
+				if (!this.heal(target.baseMaxhp / 4)) {
+					this.add('-immune', target, '[from] ability: Starstruck Veil');
+				}
+				return null;
+			}
+		},
 		onStart(pokemon) {
-			if (pokemon.ignoringItem()) return;
-			const item = pokemon.getItem();
-			if (!item.naturalGift) return;
-			let type: string;
-			type = item.naturalGift.type;
-
-			if (!pokemon.hasType(type) && pokemon.addType(type)) {
-				this.add('-start', pokemon, 'typeadd', type, '[from] ability: Adept Prowess');
+			this.add('-ability', pokemon, 'Teravolt');
+		},
+		onModifyMove(move) {
+			move.ignoreAbility = true;
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Dark') {
+				this.boost({spa: 1});
 			}
 		},
-
-		onUpdate(pokemon) {
-			if ((pokemon.ignoringItem() || !pokemon.item) && Object.keys(pokemon.getTypes()).length === 2) {
-				pokemon.setType("Ground");
-				this.add('-start', pokemon, 'typechange', 'Grass', '[from] ability: Adept Prowess');
-			}
-		},
-		name: "Adept Prowess",
+		flags: {breakable: 1},
+		name: "Starstruck Veil",
 		rating: 3.5,
 		num: -1,
 	},

@@ -24,53 +24,87 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 */
 
 export const Moves: {[k: string]: ModdedMoveData} = {
-	dededehammerthrow: {
+	fallingstar: {
 		num: -1,
-		accuracy: 90,
+		accuracy: 80,
 		basePower: 100,
-		category: "Physical",
+		category: "Special",
 		shortDesc: "Lowers the user's Attack by 1. ",
-		name: "Dedede Hammer Throw",
-		pp: 10,
+		name: "Falling Star",
+		pp: 16,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Hammer Arm", target);
+			this.add('-anim', source, "Draco Meteor", target);
 		},
-		self: {
-			boosts: {
-				atk: -1,
+		basePowerCallback(pokemon, target, move) {
+			if (target.hasType("Flying") || target.hasAbility('levitate')) {
+				this.debug('BP doubled from status condition');
+				return move.basePower * 2;
+			}
+			return move.basePower;
+		},
+		condition: {
+			noCopy: true,
+			onStart(pokemon) {
+				let applies = false;
+				if (pokemon.hasType('Flying') || pokemon.hasAbility('levitate')) applies = true;
+				if (pokemon.hasItem('ironball') || pokemon.volatiles['ingrain'] ||
+					this.field.getPseudoWeather('gravity')) applies = false;
+				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
+					applies = true;
+					this.queue.cancelMove(pokemon);
+					pokemon.removeVolatile('twoturnmove');
+				}
+				if (pokemon.volatiles['magnetrise']) {
+					applies = true;
+					delete pokemon.volatiles['magnetrise'];
+				}
+				if (pokemon.volatiles['telekinesis']) {
+					applies = true;
+					delete pokemon.volatiles['telekinesis'];
+				}
+				if (!applies) return false;
+				this.add('-start', pokemon, 'Smack Down');
 			},
+			onRestart(pokemon) {
+				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
+					this.queue.cancelMove(pokemon);
+					pokemon.removeVolatile('twoturnmove');
+					this.add('-start', pokemon, 'Smack Down');
+				}
+			},
+			// groundedness implemented in battle.engine.js:BattlePokemon#isGrounded
 		},
 		secondary: null,
-		target: "normal",
-		type: "Flying",
-		contestType: "Tough",
+		target: "allAdjacentFoes",
+		type: "Fairy",
+		contestType: "Cute",
 	},
-	electrohammer: {
+	faeflood: {
 		num: -2,
-		accuracy: 90,
-		basePower: 100,
-		category: "Physical",
-		shortDesc: "Lowers the user's Speed by 1.",
-		name: "Electro Hammer",
+		accuracy: 85,
+		basePower: 90,
+		category: "Special",
+		shortDesc: "Removes terrain and weather. Lowers foe(s) speed by 1.",
+		name: "Fae Flood",
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Hammer Arm", target);
+			this.add('-anim', source, "Surf", target);
 		},
-		self: {
+		secondary: {
+			chance: 100,
 			boosts: {
-				atk: -1,
+				spe: -1,
 			},
 		},
-		secondary: null,
-		target: "normal",
-		type: "Electric",
-		contestType: "Tough",
+		target: "allAdjacentFoes",
+		type: "Water",
+		contestType: "Cute",
 	},
 	sheikahslate: {
 		num: -3,

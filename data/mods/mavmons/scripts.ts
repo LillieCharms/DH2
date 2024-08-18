@@ -1,8 +1,8 @@
 export const Scripts: ModdedBattleScriptsData = {
 	gen: 9,
 	teambuilderConfig: {
-		excludeStandardTiers: true,
-		customTiers: ['CC OU', 'CC Ubers', 'CC UU', 'unintroduced'],
+		excludeStandardTiers: false,
+		customTiers: ['MV OU', 'MV Ubers', 'MV UU', 'Coming Soon'],
 	},
 
 	getDamage(

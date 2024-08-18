@@ -1,11 +1,11 @@
 export const Pokedex: {[k: string]: ModdedSpeciesData} = {
-	mrbeast: {
-		num: 1,
-		name: "<Mr Beast>",
-		types: ["Normal", "Fairy", "Fighting"],
-		gender: "M",
-		baseStats: {hp: 70, atk: 105, def: 78, spa: 78, spd: 94, spe: 107},
-		abilities: {0: "Overgrow", H: "Regenerator"},
-		weightkg: 85,
+	charms: {
+		num: 2000,
+		name: "Charms",
+		types: ["Water", "Fairy"],
+		gender: "F",
+		baseStats: {hp: 120, atk: 80, def: 100, spa: 130, spd: 107, spe: 143},
+		abilities: {0: "Victiry Star", H: "Starstruck Veil"},
+		weightkg: 70,
 	},
 };
