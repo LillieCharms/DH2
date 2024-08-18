@@ -1,30 +1,13 @@
 export const Items: {[itemid: string]: ModdedItemData} = {
-	dededesmask: {
-		name: "Dedede's Mask",
-		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 2) || pokemon.baseSpecies.num === 2) {
-				return false;
-			}
-			return true;
-		},
-		onTryAddVolatile(status, pokemon) {
-			if (status.id === 'flinch') return null;
-		},
-		forcedForme: "Masked Dedede",
-		itemUser: ["Masked Dedede"],
-		num: -1,
-		gen: 9,
-		desc: "If held by King Dedede, this item changes its forme to Masked Dedede. Holder is immune to flinching.",
-	},
-	dracocentauriumz: {
-		name: "Dracocentaurium Z",
-		desc: "If held by Draco Centauros with Draco Burning, it can use Great Fire.",
-		spritenum: 632,
+	starniumz: {
+		name: "Starnium Z",
+		desc: "If held by Charms with Falling Star, it can use Stars That Pierce the Heavens.",
+		spritenum: 687,
 		onTakeItem: false,
-		zMove: "Great Fire",
-		zMoveFrom: "Draco Burning",
-		itemUser: ["Draco Centauros"],
-		num: -2,
+		zMove: "Stars That Pierce the Heavens",
+		zMoveFrom: "Falling Star",
+		itemUser: ["Charms"],
+		num: -1,
 		gen: 9,
 	},
 	wriggliumz: {
@@ -87,7 +70,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 	},
 	nahidiumz: {
 		name: "Nahidium Z",
-		desc: "If held by Nahida with Scheme of Acuity, it can use Illusory Heartburst.",
+		desc: "If held by Nahida with Scheme of Acuity, it can use Illusory rtburst.",
 		spritenum: 635,
 		onTakeItem: false,
 		zMove: "Illusory Heartburst",

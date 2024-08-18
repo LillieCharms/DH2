@@ -228,23 +228,23 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fairy",
 		contestType: "Cute",
 	},
-	dracoburning: {
+	uppercutter: {
 		num: -7,
-		accuracy: 90,
-		basePower: 105,
+		accuracy: 100,
+		basePower: 80,
 		category: "Physical",
-		shortDesc: "Can hit Pokemon using Bounce, Fly, or Sky Drop.",
-		name: "Draco Burning",
-		pp: 10,
+		shortDesc: "",
+		name: "Upper Cutter",
+		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Fire Blast", target);
+			this.add('-anim', source, "Smart Strike", target);
 		},
 		secondary: null,
 		target: "normal",
-		type: "Fire",
+		type: "Steel",
 		contestType: "Cool",
 	},
 	frostkick: {

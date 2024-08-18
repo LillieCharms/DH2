@@ -46,34 +46,50 @@ export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 		rating: 3.5,
 		num: -1,
 	},
-	puyomastery: {
-		shortDesc: "This Pokemon's Water moves have 1.5x power.",
-		onModifyAtkPriority: 5,
-		onModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Water') {
-				this.debug('Puyo Mastery boost');
-				return this.chainModify(1.5);
+	benmode: {
+		onResidualOrder: 29,
+		onResidual(pokemon) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Ben' || pokemon.transformed) {
+				return;
+			}
+			if (pokemon.hp <= pokemon.maxhp / 2 && !['Ben Mode'].includes(pokemon.species.forme)) {
+				pokemon.addVolatile('benmode');
+			} else if (pokemon.hp > pokemon.maxhp / 2 && ['Ben Mode'].includes(pokemon.species.forme)) {
+				pokemon.addVolatile('benmode'); // in case of base Darmanitan-Zen
+				pokemon.removeVolatile('benmode');
 			}
 		},
-		onModifySpAPriority: 5,
-		onModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Water') {
-				this.debug('Puyo Mastery boost');
-				return this.chainModify(1.5);
+		onEnd(pokemon) {
+			if (!pokemon.volatiles['benmode'] || !pokemon.hp) return;
+			pokemon.transformed = false;
+			delete pokemon.volatiles['benmode'];
+			if (pokemon.species.baseSpecies === 'Ben' && pokemon.species.battleOnly) {
+				pokemon.formeChange(pokemon.species.battleOnly as string, this.effect, false, '[silent]');
 			}
 		},
-		name: "Puyo Mastery",
-		rating: 3.5,
+		condition: {
+			onEnd(pokemon) {
+				if (['Ben Mode'].includes(pokemon.species.forme)) {
+					pokemon.formeChange(pokemon.species.battleOnly as string);
+				}
+			},
+		},
+		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1},
+		name: "Ben Mode",
+		rating: 0,
 		num: -2,
 	},
-	funkymode: {
-		shortDesc: "This Pokemon does not take damage from hazards.",
-		onDamage(damage, target, source, effect) {
-			if (effect && (effect.id === 'stealthrock' || effect.id === 'spikes')) {
-				return false;
+	harmfulmental: {
+		shortDesc: "The user’s attacks are powered up by 20%, but they take 10% recoil after landing an attack.",
+		onModifyDamage(damage, source, target, move) {
+			return this.chainModify([1200, 1000]);
+		},
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (source && source !== target && move && move.category !== 'Status' && !source.forceSwitchFlag) {
+				this.damage(source.baseMaxhp / 10, source, source, this.dex.items.get('lifeorb'));
 			}
 		},
-		name: "Funky Mode",
+		name: "Harmful Mental",
 		rating: 4,
 		num: -3,
 	},
