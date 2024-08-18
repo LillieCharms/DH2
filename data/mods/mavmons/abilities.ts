@@ -25,7 +25,7 @@ Ratings and how they work:
 
 export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 	starstruckveil: {
-		shortDesc: "This Pokemon heals 1/4 of its max HP when hit by a Fire move; Fire Immunity. When hit by a Dark-type move raise this Pokemon's Special Attack by 1. Ignore other abilities.",
+		shortDesc: "Heals 1/4 max HP when hit by a Fire move; Fire Immunity.  Hit by a Dark-type move raise Special Attack by 1. Ignore other abilities.",
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Fire') {
 				if (!this.heal(target.baseMaxhp / 4)) {
@@ -33,9 +33,6 @@ export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 				}
 				return null;
 			}
-		},
-		onStart(pokemon) {
-			this.add('-ability', pokemon, 'Teravolt');
 		},
 		onModifyMove(move) {
 			move.ignoreAbility = true;
@@ -45,7 +42,6 @@ export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 				this.boost({spa: 1});
 			}
 		},
-		flags: {breakable: 1},
 		name: "Starstruck Veil",
 		rating: 3.5,
 		num: -1,

@@ -3,5 +3,9 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "MV Ubers",
 		doublesTier: "DMV Ubers",
 	},
+	diantha: {
+		tier: "MV Ubers",
+		doublesTier: "DMV Ubers",
+	},
 	
 };
