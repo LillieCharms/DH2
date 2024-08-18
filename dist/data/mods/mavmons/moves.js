@@ -22,188 +22,212 @@ __export(moves_exports, {
 });
 module.exports = __toCommonJS(moves_exports);
 const Moves = {
-  dededehammerthrow: {
+  fallingstar: {
     num: -1,
-    accuracy: 90,
-    basePower: 100,
-    category: "Physical",
-    shortDesc: "Lowers the user's Attack by 1. ",
-    name: "Dedede Hammer Throw",
-    pp: 10,
-    priority: 0,
-    flags: { contact: 1, protect: 1, mirror: 1 },
-    onPrepareHit(target2, source2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", source2, "Hammer Arm", target2);
-    },
-    self: {
-      boosts: {
-        atk: -1
-      }
-    },
-    secondary: null,
-    target: "normal",
-    type: "Flying",
-    contestType: "Tough"
-  },
-  electrohammer: {
-    num: -2,
-    accuracy: 90,
-    basePower: 100,
-    category: "Physical",
-    shortDesc: "Lowers the user's Speed by 1.",
-    name: "Electro Hammer",
-    pp: 10,
-    priority: 0,
-    flags: { contact: 1, protect: 1, mirror: 1 },
-    onPrepareHit(target2, source2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", source2, "Hammer Arm", target2);
-    },
-    self: {
-      boosts: {
-        atk: -1
-      }
-    },
-    secondary: null,
-    target: "normal",
-    type: "Electric",
-    contestType: "Tough"
-  },
-  sheikahslate: {
-    num: -3,
-    accuracy: 100,
+    accuracy: 80,
     basePower: 100,
     category: "Special",
-    shortDesc: "20% chance to burn, freeze or paralyse the target.",
-    name: "Sheikah Slate",
-    pp: 10,
+    shortDesc: "Deals x2 damage and grounds levitating/flying Pokemon.",
+    name: "Falling Star",
+    pp: 15,
     priority: 0,
-    flags: { protect: 1, mirror: 1 },
+    flags: { contact: 1, protect: 1, mirror: 1 },
     onPrepareHit(target2, source2, move) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Tri Attack", target2);
+      this.add("-anim", source2, "Draco Meteor", target2);
     },
-    secondary: {
-      chance: 20,
-      onHit(target2, source2) {
-        const result = this.random(3);
-        if (result === 0) {
-          target2.trySetStatus("brn", source2);
-        } else if (result === 1) {
-          target2.trySetStatus("par", source2);
-        } else {
-          target2.trySetStatus("frz", source2);
+    basePowerCallback(pokemon2, target2, move) {
+      if (target2.hasType("Flying") || target2.hasAbility("levitate")) {
+        this.debug("BP doubled from Floating");
+        return move.basePower * 2;
+      }
+      return move.basePower;
+    },
+    condition: {
+      noCopy: true,
+      onStart(pokemon2) {
+        let applies = false;
+        if (pokemon2.hasType("Flying") || pokemon2.hasAbility("levitate"))
+          applies = true;
+        if (pokemon2.hasItem("ironball") || pokemon2.volatiles["ingrain"] || this.field.getPseudoWeather("gravity"))
+          applies = false;
+        if (pokemon2.removeVolatile("fly") || pokemon2.removeVolatile("bounce")) {
+          applies = true;
+          this.queue.cancelMove(pokemon2);
+          pokemon2.removeVolatile("twoturnmove");
+        }
+        if (pokemon2.volatiles["magnetrise"]) {
+          applies = true;
+          delete pokemon2.volatiles["magnetrise"];
+        }
+        if (pokemon2.volatiles["telekinesis"]) {
+          applies = true;
+          delete pokemon2.volatiles["telekinesis"];
+        }
+        if (!applies)
+          return false;
+        this.add("-start", pokemon2, "Smack Down");
+      },
+      onRestart(pokemon2) {
+        if (pokemon2.removeVolatile("fly") || pokemon2.removeVolatile("bounce")) {
+          this.queue.cancelMove(pokemon2);
+          pokemon2.removeVolatile("twoturnmove");
+          this.add("-start", pokemon2, "Smack Down");
         }
       }
+      // groundedness implemented in battle.engine.js:BattlePokemon#isGrounded
     },
-    target: "normal",
-    type: "Psychic",
-    contestType: "Clever"
+    secondary: null,
+    target: "allAdjacentFoes",
+    type: "Fairy",
+    contestType: "Cute"
   },
-  lightarrow: {
-    num: -4,
-    accuracy: 100,
-    basePower: 70,
+  faeflood: {
+    num: -2,
+    accuracy: 85,
+    basePower: 90,
     category: "Special",
-    shortDesc: "Traps target, super-effective against Dark.",
-    name: "Light Arrow",
-    pp: 5,
+    shortDesc: "Removes field Effects. Lowers foe speed by 1.",
+    name: "Fae Flood",
+    pp: 10,
     priority: 0,
-    flags: { protect: 1, mirror: 1 },
-    onEffectiveness(typeMod, target2, type) {
-      if (type === "Dark")
-        return 1;
-    },
+    flags: { contact: 1, protect: 1, mirror: 1 },
     onPrepareHit(target2, source2, move) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Spirit Shackle", target2);
+      this.add("-anim", source2, "Surf", target2);
     },
     secondary: {
       chance: 100,
-      onHit(target2, source2, move) {
-        if (source2.isActive)
-          target2.addVolatile("trapped", source2, move, "trapper");
+      boosts: {
+        spe: -1
       }
     },
-    ignoreImmunity: { "Dark": true },
+    target: "allAdjacentFoes",
+    type: "Water",
+    contestType: "Cute"
+  },
+  rainbowroad: {
+    num: -3,
+    accuracy: 90,
+    basePower: 75,
+    category: "Special",
+    shortDesc: "Switch out, 30% chance to reduce foe Special Defense by 1.",
+    name: "Rainbow Road",
+    pp: 10,
+    priority: 0,
+    flags: { protect: 1, mirror: 1 },
+    onPrepareHit(target2, source2, move) {
+      this.attrLastMove("[still]");
+      this.add("-anim", source2, "Moonlight", target2);
+    },
+    selfSwitch: true,
+    secondary: {
+      chance: 30,
+      boosts: {
+        spd: -1
+      }
+    },
     target: "normal",
-    type: "Psychic",
+    type: "Fire",
+    contestType: "Clever"
+  },
+  marketingblast: {
+    num: -4,
+    accuracy: 100,
+    basePower: 95,
+    category: "Special",
+    shortDesc: "Sets up a layer of spikes.",
+    name: "MARKETING BLAST",
+    pp: 10,
+    priority: 0,
+    flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
+    onAfterHit(target2, source2, move) {
+      if (!move.hasSheerForce && source2.hp) {
+        for (const side of source2.side.foeSidesWithConditions()) {
+          side.addSideCondition("spikes");
+        }
+      }
+    },
+    onAfterSubDamage(damage, target2, source2, move) {
+      if (!move.hasSheerForce && source2.hp) {
+        for (const side of source2.side.foeSidesWithConditions()) {
+          side.addSideCondition("spikes");
+        }
+      }
+    },
+    secondary: {},
+    // Sheer Force-boosted
+    target: "normal",
+    type: "Fairy",
     contestType: "Beautiful"
   },
-  psyblast: {
+  sublimeheaven: {
     num: -5,
     accuracy: 100,
-    basePower: 90,
+    basePower: 100,
     category: "Special",
-    shortDesc: "Consumes Berry and changes move type.",
-    name: "Psy Blast",
+    shortDesc: "Super effective on Dragon-type Pokemon.",
+    name: "Sublime Heaven",
     pp: 15,
     priority: 0,
     flags: { protect: 1, mirror: 1 },
-    onModifyType(move, pokemon2) {
-      if (pokemon2.ignoringItem())
-        return;
-      const item = pokemon2.getItem();
-      if (!item.naturalGift)
-        return;
-      move.type = item.naturalGift.type;
-    },
-    onPrepareHit(target2, pokemon2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", pokemon2, "Psystrike", target2);
-      if (pokemon2.ignoringItem())
-        return false;
-      const item = pokemon2.getItem();
-      if (!item.naturalGift)
-        return false;
-      move.basePower = item.naturalGift.basePower;
-      if (!pokemon2.hasAbility("adeptprowess")) {
-        pokemon2.setItem("");
-        pokemon2.lastItem = item.id;
-        pokemon2.usedItemThisTurn = true;
-        this.runEvent("AfterUseItem", pokemon2, null, null, item);
-      }
+    onEffectiveness(typeMod, target2, type) {
+      if (type === "Dragon")
+        return 1;
     },
     secondary: null,
     target: "normal",
-    type: "Psychic",
+    type: "Fighting",
     contestType: "Clever"
   },
-  puyopop: {
+  disarm: {
     num: -6,
     accuracy: 90,
     basePower: 10,
     basePowerCallback(pokemon2, target2, move) {
       return 10 * move.hit;
     },
-    category: "Special",
-    shortDesc: "Hits 4 times. Each hit can miss, but power rises. Fourth hit clears user side's hazards.",
-    id: "puyopop",
-    name: "Puyo Pop",
-    pp: 10,
-    priority: 0,
+    category: "Status",
+    shortDesc: "The foes Attack and Special Attack are lowered by 1, and taunts foe for 2 turns.",
+    name: "Disarm",
+    pp: 5,
+    priority: 1,
     flags: { protect: 1, mirror: 1 },
     onHit(target2, source2, move) {
-      if (move.hit !== 4)
-        return;
-      const removeAll = ["spikes", "toxicspikes", "stealthrock", "stickyweb"];
-      for (const sideCondition of removeAll) {
-        if (source2.side.removeSideCondition(sideCondition)) {
-          this.add("-sideend", source2.side, this.dex.conditions.get(sideCondition).name, "[from] move: Puyo Pop", "[of] " + source2);
+      const success = this.boost({ atk: -1, spa: -1 }, target2, source2);
+    },
+    volatileStatus: "taunt",
+    condition: {
+      duration: 2,
+      onStart(target2) {
+        if (target2.activeTurns && !this.queue.willMove(target2)) {
+          this.effectState.duration++;
+        }
+        this.add("-start", target2, "move: Taunt");
+      },
+      onResidualOrder: 15,
+      onEnd(target2) {
+        this.add("-end", target2, "move: Taunt");
+      },
+      onDisableMove(pokemon2) {
+        for (const moveSlot of pokemon2.moveSlots) {
+          const move = this.dex.moves.get(moveSlot.id);
+          if (move.category === "Status" && move.id !== "mefirst") {
+            pokemon2.disableMove(moveSlot.id);
+          }
+        }
+      },
+      onBeforeMovePriority: 5,
+      onBeforeMove(attacker, defender, move) {
+        if (!move.isZ && !move.isMax && move.category === "Status" && move.id !== "mefirst") {
+          this.add("cant", attacker, "move: Taunt", move);
+          return false;
         }
       }
     },
-    onPrepareHit(target2, source2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", source2, "Water Shuriken", target2);
-    },
-    multihit: 4,
-    multiaccuracy: true,
     secondary: null,
     target: "normal",
-    type: "Water",
-    zMovePower: 180,
+    type: "Fairy",
     contestType: "Cute"
   },
   dracoburning: {

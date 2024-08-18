@@ -22,27 +22,25 @@ __export(abilities_exports, {
 });
 module.exports = __toCommonJS(abilities_exports);
 const Abilities = {
-  adeptprowess: {
-    shortDesc: "Gains secondary type based on held berry. Psy Blast doesn't consume berry.",
-    onStart(pokemon) {
-      if (pokemon.ignoringItem())
-        return;
-      const item = pokemon.getItem();
-      if (!item.naturalGift)
-        return;
-      let type;
-      type = item.naturalGift.type;
-      if (!pokemon.hasType(type) && pokemon.addType(type)) {
-        this.add("-start", pokemon, "typeadd", type, "[from] ability: Adept Prowess");
+  starstruckveil: {
+    shortDesc: "Heals 1/4 max HP when hit by a Fire move; Fire Immunity.  Hit by a Dark-type move raise Special Attack by 1. Ignore other abilities.",
+    onTryHit(target, source, move) {
+      if (target !== source && move.type === "Fire") {
+        if (!this.heal(target.baseMaxhp / 4)) {
+          this.add("-immune", target, "[from] ability: Starstruck Veil");
+        }
+        return null;
       }
     },
-    onUpdate(pokemon) {
-      if ((pokemon.ignoringItem() || !pokemon.item) && Object.keys(pokemon.getTypes()).length === 2) {
-        pokemon.setType("Ground");
-        this.add("-start", pokemon, "typechange", "Grass", "[from] ability: Adept Prowess");
+    onModifyMove(move) {
+      move.ignoreAbility = true;
+    },
+    onDamagingHit(damage, target, source, move) {
+      if (move.type === "Dark") {
+        this.boost({ spa: 1 });
       }
     },
-    name: "Adept Prowess",
+    name: "Starstruck Veil",
     rating: 3.5,
     num: -1
   },

@@ -22,9 +22,13 @@ __export(formats_data_exports, {
 });
 module.exports = __toCommonJS(formats_data_exports);
 const FormatsData = {
-  mrbeast: {
-    tier: "MV OU",
-    doublesTier: "DMV OU"
+  charms: {
+    tier: "MV Ubers",
+    doublesTier: "DMV Ubers"
+  },
+  diantha: {
+    tier: "MV Ubers",
+    doublesTier: "DMV Ubers"
   }
 };
 //# sourceMappingURL=formats-data.js.map

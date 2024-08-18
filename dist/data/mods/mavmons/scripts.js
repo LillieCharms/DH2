@@ -24,8 +24,8 @@ module.exports = __toCommonJS(scripts_exports);
 const Scripts = {
   gen: 9,
   teambuilderConfig: {
-    excludeStandardTiers: true,
-    customTiers: ["CC OU", "CC Ubers", "CC UU", "unintroduced"]
+    excludeStandardTiers: false,
+    customTiers: ["MV Ubers", "Coming Soon"]
   },
   getDamage(pokemon, target, move, suppressMessages = false) {
     if (typeof move === "string")

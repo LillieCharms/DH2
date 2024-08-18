@@ -22,14 +22,23 @@ __export(pokedex_exports, {
 });
 module.exports = __toCommonJS(pokedex_exports);
 const Pokedex = {
-  mrbeast: {
-    num: 1,
-    name: "<Mr Beast>",
-    types: ["Normal"],
-    gender: "M",
-    baseStats: { hp: 70, atk: 105, def: 78, spa: 78, spd: 94, spe: 107 },
-    abilities: { 0: "Overgrow", H: "Regenerator" },
-    weightkg: 85
+  charms: {
+    num: 2e3,
+    name: "Charms",
+    types: ["Water", "Fairy"],
+    gender: "F",
+    baseStats: { hp: 120, atk: 80, def: 100, spa: 130, spd: 107, spe: 143 },
+    abilities: { 0: "Victory Star", H: "Starstruck Veil" },
+    weightkg: 70
+  },
+  diantha: {
+    num: 2001,
+    name: "Diantha",
+    types: ["Fairy"],
+    gender: "F",
+    baseStats: { hp: 100, atk: 85, def: 90, spa: 165, spd: 105, spe: 135 },
+    abilities: { 0: "Cute Charm" },
+    weightkg: 50
   }
 };
 //# sourceMappingURL=pokedex.js.map
