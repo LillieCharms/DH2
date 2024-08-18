@@ -8,7 +8,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			workup: ["9L1"],
 			surf: ["9L1"],
 			waterfall: ["9L1"],
-			moonblast: ["9L1"],
 			flamethrower: ["9L1"],
 			dazzlinggleam: ["9L1"],
 			thunderbolt: ["9L1"],

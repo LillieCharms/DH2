@@ -5,7 +5,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		types: ["Water", "Fairy"],
 		gender: "F",
 		baseStats: {hp: 120, atk: 80, def: 100, spa: 130, spd: 107, spe: 143},
-		abilities: {0: "Victiry Star", H: "Starstruck Veil"},
+		abilities: {0: "Victory Star", H: "Starstruck Veil"},
 		weightkg: 70,
 	},
 };
