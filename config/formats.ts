@@ -32,7 +32,8 @@ export const Formats: FormatList = [
 		mod: 'mavmons',
 		teambuilderFormat: "National Dex",
 		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Sleep Clause Mod', 'Terastal Clause', /* 'Mega Data Mod' */],
-		unbanlist: ['Charms']
+		unbanlist: ['Charms'],
+		
 		onValidateTeam(team, format) {
             let speciesTable = {};
             let allowedTiers = ['MV Ubers, OU, Ubers'];
