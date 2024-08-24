@@ -30,7 +30,8 @@ export const Formats: FormatList = [
 		name: "[Gen 9] Maverick* Mons",
 		desc: `Maverick* Mons, a micrometa designed to use Maverick* Server Fakemons.`,
 		mod: 'mavmons',
-		teambuilderFormat: "National Dex",
+		teambuilderFormat: 'National Dex',
+		unbanlist: ['lgpe'],
 		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Terastal Clause', /* 'Mega Data Mod' */],
 		onValidateTeam(team, format) {
 			/**@type {{[k: string]: true}}*/

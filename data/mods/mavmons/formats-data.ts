@@ -15,4 +15,8 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "MV Ubers",
 		doublesTier: "DMV Ubers",
 	},
+	zeya: {
+		tier: "MV Ubers",
+		doublesTier: "DMV Ubers",
+	},
 };

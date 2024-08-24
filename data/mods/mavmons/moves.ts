@@ -243,23 +243,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fairy",
 		contestType: "Cute",
 	},
-	uppercutter: {
+	ragingdemon: {
 		num: -7,
 		accuracy: 100,
-		basePower: 80,
+		basePower: 100,
 		category: "Physical",
-		shortDesc: "",
-		name: "Upper Cutter",
-		pp: 15,
+		shortDesc: "When you knock out a target using this move, you recover 1/4th of your max HP",
+		name: "Raging Demon",
+		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Smart Strike", target);
+			this.add('-anim', source, "Wicked Blow", target);
+		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (!target || target.fainted || target.hp <= 0) this.heal(pokemon.baseMaxhp / 4);
 		},
 		secondary: null,
 		target: "normal",
-		type: "Steel",
+		type: "Dark",
 		contestType: "Cool",
 	},
 	starsthatpiercetheheavens: {
@@ -453,50 +456,84 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Steel",
 		contestType: "Beautiful",
 	},
-	jumbobarrel: {
+	callanuber: {
 		num: -11,
 		accuracy: 100,
-		basePower: 80,
+		basePower: 70,
 		category: "Physical",
-		shortDesc: "30% chance to raise the user's Attack by 1. ",
-		name: "Jumbo Barrel",
-		pp: 15,
+		shortDesc: "User switches out.",
+		name: "Call an Uber",
+		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Aeroblast", target);
-			this.add('-anim', source, "Quick Attack", target);
+			this.add('-anim', source, "Shift Gear", target);
+			this.add('-anim', source, "U-Turn", target);
 		},
-		secondary: {
-			chance: 30,
-			self: {
-				boosts: {
-					atk: 1,
-				},
-			},
-		},
+		selfSwitch: true,
 		target: "normal",
-		type: "Flying",
+		type: "Dark",
 		contestType: "Cool",
 	},
-	precisionstrikes: {
+	shockbubble: {
 		num: -12,
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
-		shortDesc: "Heals 40% of the damage dealt.",
-		name: "Precision Strikes",
-		pp: 10,
-		priority: 0,
+		shortDesc: "Protects user, if a move is blocked sets up Electric Terrain.",
+		name: "Shock Bubble",
+		pp: 15,
+		priority: 4,
 		flags: {contact: 1, slicing: 1, heal: 1, protect: 1, mirror: 1},
-		onPrepareHit(target, source, move) {
+		onPrepareHit(target, source, pokemon) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Slash", target);
+			this.add('-anim', source, "Tail Glow", target);
+			this.add('-anim', source, "Protect", target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
-		drain: [4, 10],
+		stallingMove: true,
+		volatileStatus: 'shockbubble',
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		condition: {
+			duration: 1,
+			onStart(target) {
+				this.add('-singleturn', target, 'move: Protect');
+			},
+			onTryHitPriority: 3,
+			onTryHit(target, source, move) {
+				if (!move.flags['protect']) {
+					if (['gmaxoneblow', 'gmaxrapidflow'].includes(move.id)) return;
+					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					return;
+				}
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Protect');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				if (this.checkMoveMakesContact(move, source, target)) {
+					this.field.setTerrain('electricterrain');
+				}
+				return this.NOT_FAIL;
+			},
+			onHit(target, source, move) {
+				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
+					this.field.setTerrain('electricterrain');
+				}
+			},
+		},
 		target: "normal",
-		type: "Fighting",
+		type: "Electric",
 		contestType: "Cool",
 	},
 	rudebuster: {
