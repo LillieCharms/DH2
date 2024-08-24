@@ -25,7 +25,7 @@ Ratings and how they work:
 
 export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 	starstruckveil: {
-		shortDesc: "Heals 1/4 max HP when hit by a Fire move; Fire Immunity.  Hit by a Dark-type move raise Special Attack by 1. Ignore other abilities.",
+		shortDesc: "Fire type volt absorb. Special Justified. Ignore other abilities.",
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Fire') {
 				if (!this.heal(target.baseMaxhp / 4)) {
@@ -93,45 +93,42 @@ export const Abilities: {[abilityid: string]: ModdedAbilityData} = {
 		rating: 4,
 		num: -3,
 	},
-	runelord: {
-		shortDesc: "The Pokémon's special become physical, slicing, and contact.",
-		onModifyMove(move) {
-			if (move.category === 'Special') {
-				if (!move.flags['contact']) move.flags.contact = 1;
-				if (!move.flags['slicing']) move.flags.slicing = 1;
-				move.category = 'Physical';
-			}
+	halaltrip: {
+		shortDesc: "This Pokémon restores 3% of its HP at the end of every turn.",
+		onResidualOrder: 5,
+		onResidualSubOrder: 4,
+		onResidual(pokemon) {
+			this.heal(pokemon.baseMaxhp / 32);
 		},
-		name: "Runelord",
+		name: "Halal Trip",
 		rating: 3,
 		num: -4,
 	},
-	torchofmadness: {
-		shortDesc: "This Pokemon's moves have 1.3x power against burned targets.",
-		onBasePower(basePower, attacker, defender, move) {
-			if (defender && ['brn'].includes(defender.status)) return this.chainModify(1.3);
+	anticipatedstrikes: {
+		shortDesc: "Deals 2.1x (instead of 1.5x) for STAB moves.",
+		onModifySTAB(stab, source, target, move) {
+			if (move.forceSTAB || source.hasType(move.type)) {
+				if (stab === 2) {
+					return 2.50;
+				}
+				return 2;
+			}
 		},
-		name: "Torch of Madness",
+		name: "Anticipated Strikes",
 		rating: 4,
 		num: -5,
 	},
-	crystallize: {
-		shortDesc: "This Pokemon's Normal-type moves become Rock-type and have 1.2x power.",
+	cageddemon: {
+		shortDesc: "When the user is hit by a super effective attack, raises Atk/SpA by 2, lowers Def/SpD by 2, and the user slowly perishes. ",
 		onModifyTypePriority: -1,
-		onModifyType(move, pokemon) {
-			const noModifyType = [
-				'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
-			];
-			if (move.type === 'Normal' && !noModifyType.includes(move.id) &&
-				!(move.isZ && move.category !== 'Status') && !(move.name === 'Tera Blast' && pokemon.terastallized)) {
-				move.type = 'Rock';
-				move.typeChangerBoosted = this.effect;
-			}
-		},
-		onBasePowerPriority: 23,
-		onBasePower(basePower, pokemon, target, move) {
-			if (move.typeChangerBoosted === this.effect) return this.chainModify([4915, 4096]);
-		},
+			onTryHit(target, source, move) {
+				if (target !== source && move.type === 'Poison','Steel') {
+					if (!this.boost({spa: 2, atk: 2, def: -2, spd: -2})) 
+					source.addVolatile('perishsong');
+					this.add('-start', source, 'perish3', '[silent]');
+					return null;
+				}
+			},
 		name: "Crystallize",
 		rating: 4,
 		num: -6,

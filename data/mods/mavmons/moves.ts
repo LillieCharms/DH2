@@ -45,6 +45,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 			return move.basePower;
 		},
+		volatileStatus: 'smackdown',
 		condition: {
 			noCopy: true,
 			onStart(pokemon) {
@@ -96,12 +97,19 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Surf", target);
 		},
+		onHit() {
+			this.field.clearTerrain();
+		},
+		onAfterSubDamage() {
+			this.field.clearTerrain();
+		},
 		secondary: {
 			chance: 100,
 			boosts: {
 				spe: -1,
 			},
 		},
+		weather: 'none',
 		target: "allAdjacentFoes",
 		type: "Water",
 		contestType: "Cute",
@@ -134,7 +142,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	marketingblast: {
 		num: -4,
 		accuracy: 100,
-		basePower: 95,
+		basePower: 90,
 		category: "Special",
 		shortDesc: "Sets up a layer of spikes.",
 		name: "MARKETING BLAST",
@@ -172,6 +180,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {protect: 1, mirror: 1},
 		onEffectiveness(typeMod, target, type) {
 			if (type === 'Dragon') return 1;
+		},
+		onBasePower(basePower, source, target, move) {
+			if (target.runEffectiveness(move) > 0) {
+				// Placeholder
+				this.debug(`sublime heaven super effective buff`);
+				return this.chainModify([5461, 4096]);
+			}
 		},
 		secondary: null,
 		target: "normal",
@@ -247,71 +262,195 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Steel",
 		contestType: "Cool",
 	},
-	frostkick: {
+	starsthatpiercetheheavens: {
 		num: -8,
-		accuracy: 90,
-		basePower: 85,
-		category: "Physical",
-		shortDesc: "High critical hit ratio. 10% chance to freeze.",
-		name: "Frost Kick",
-		pp: 10,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		critRatio: 2,
-		secondary: {
-			chance: 10,
-			status: 'frz',
-		},
-		onPrepareHit(target, source, move) {
-			this.attrLastMove('[still]');
-			this.add('-anim', source, "Ice Hammer", target);
-		},
-		target: "normal",
-		type: "Ice",
-		contestType: "Cool",
-	},
-	shockkick: {
-		num: -9,
-		accuracy: 90,
-		basePower: 85,
-		category: "Physical",
-		shortDesc: "High critical hit ratio. 10% chance to paralyze.",
-		name: "Shock Kick",
-		pp: 10,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		critRatio: 2,
-		onPrepareHit(target, source, move) {
-			this.attrLastMove('[still]');
-			this.add('-anim', source, "Thunderous Kick", target);
-		},
-		secondary: {
-			chance: 10,
-			status: 'par',
-		},
-		target: "normal",
-		type: "Electric",
-		contestType: "Cool",
-	},
-	greatfire: {
-		num: -10,
 		accuracy: true,
 		basePower: 200,
 		category: "Special",
-		name: "Great Fire",
-		shortDesc: "Calculates damage using the user's Def instead of SpA.",
+		name: "Stars That Pierce The Heavens",
+		shortDesc: "Blocks healing and removes all hazards.",
 		pp: 1,
 		priority: 0,
 		flags: {},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Inferno Overdrive", target);
+			this.add('-anim', source, "Light That Burns the Sky", target);
 		},
-		overrideOffensiveStat: 'def',
-		isZ: "dracocentauriumz",
+		onHit(target, source, move) {
+			let success = false;
+			if (!target.volatiles['substitute'] || move.infiltrates) success = !!this.boost({evasion: -1});
+			const removeTarget = [
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+			];
+			const removeAll = [
+				'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+			];
+			for (const targetCondition of removeTarget) {
+				if (target.side.removeSideCondition(targetCondition)) {
+					if (!removeAll.includes(targetCondition)) continue;
+					this.add('-sideend', target.side, this.dex.conditions.get(targetCondition).name, '[from] move: Defog', '[of] ' + source);
+					success = true;
+				}
+			}
+			for (const sideCondition of removeAll) {
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.dex.conditions.get(sideCondition).name, '[from] move: Defog', '[of] ' + source);
+					success = true;
+				}
+			}
+			this.field.clearTerrain();
+			return success;
+		},
+		volatileStatus: 'healblock',
+		condition: {
+			duration: 5,
+			durationCallback(target, source, effect) {
+				if (effect?.name === "Psychic Noise") {
+					return 2;
+				}
+				if (source?.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', '[move] Heal Block');
+					return 7;
+				}
+				return 5;
+			},
+			onStart(pokemon, source) {
+				this.add('-start', pokemon, 'move: Heal Block');
+				source.moveThisTurnResult = true;
+			},
+			onDisableMove(pokemon) {
+				for (const moveSlot of pokemon.moveSlots) {
+					if (this.dex.moves.get(moveSlot.id).flags['heal']) {
+						pokemon.disableMove(moveSlot.id);
+					}
+				}
+			},
+			onBeforeMovePriority: 6,
+			onBeforeMove(pokemon, target, move) {
+				if (move.flags['heal'] && !move.isZ && !move.isMax) {
+					this.add('cant', pokemon, 'move: Heal Block', move);
+					return false;
+				}
+			},
+			onModifyMove(move, pokemon, target) {
+				if (move.flags['heal'] && !move.isZ && !move.isMax) {
+					this.add('cant', pokemon, 'move: Heal Block', move);
+					return false;
+				}
+			},
+			onResidualOrder: 20,
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'move: Heal Block');
+			},
+			onTryHeal(damage, target, source, effect) {
+				if ((effect?.id === 'zpower') || this.effectState.isZ) return damage;
+				return false;
+			},
+			onRestart(target, source) {
+				this.add('-fail', target, 'move: Heal Block'); // Succeeds to supress downstream messages
+				if (!source.moveThisTurnResult) {
+					source.moveThisTurnResult = false;
+				}
+			},
+		},
+		isZ: "starniumz",
 		secondary: null,
 		target: "normal",
-		type: "Fire",
+		type: "Fairy",
+		contestType: "Beautiful",
+	},
+	threehitstring: {
+		num: -9,
+		accuracy: true,
+		basePower: 90,
+		category: "Physical",
+		shortDesc: "High critical hit ratio. Ignore Abilities. Does not check accuracy.",
+		name: "Three Hit String",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		critRatio: 2,
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Smart Strike", target);
+		},
+		ignoreAbility: true,
+		target: "normal",
+		type: "Electric",
+		contestType: "Cool",
+	},
+	coins: {
+		num: -10,
+		accuracy: 100,
+		basePower: 30,
+		category: "Special",
+		name: "Great Fire",
+		shortDesc: "Calculates damage using the user's Def instead of SpA.",
+		pp: 15,
+		priority: -1,
+		flags: {},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Inferno Overdrive", target);
+		},
+		self: {
+			onHit(source) {
+				for (const side of source.side.foeSidesWithConditions()) {
+					side.addSideCondition('gmaxsteelsurge');
+				}
+			},
+		},
+		condition: {
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: G-Max Steelsurge');
+			},
+			onEntryHazard(pokemon) {
+				if (pokemon.hasItem('heavydutyboots')) return;
+				// Ice Face and Disguise correctly get typed damage from Stealth Rock
+				// because Stealth Rock bypasses Substitute.
+				// They don't get typed damage from Steelsurge because Steelsurge doesn't,
+				// so we're going to test the damage of a Steel-type Stealth Rock instead.
+				const steelHazard = this.dex.getActiveMove('Stealth Rock');
+				steelHazard.type = 'Steel';
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(steelHazard), -6, 6);
+				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+			},
+		},
+		onAfterHit(target, pokemon, move) {
+			if (!move.hasSheerForce) {
+				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
+					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
+				}
+				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+				for (const condition of sideConditions) {
+					if (pokemon.hp && pokemon.side.removeSideCondition(condition)) {
+						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Rapid Spin', '[of] ' + pokemon);
+					}
+				}
+				if (pokemon.hp && pokemon.volatiles['partiallytrapped']) {
+					pokemon.removeVolatile('partiallytrapped');
+				}
+			}
+		},
+		onAfterSubDamage(damage, target, pokemon, move) {
+			if (!move.hasSheerForce) {
+				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
+					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
+				}
+				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+				for (const condition of sideConditions) {
+					if (pokemon.hp && pokemon.side.removeSideCondition(condition)) {
+						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Rapid Spin', '[of] ' + pokemon);
+					}
+				}
+				if (pokemon.hp && pokemon.volatiles['partiallytrapped']) {
+					pokemon.removeVolatile('partiallytrapped');
+				}
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Steel",
 		contestType: "Beautiful",
 	},
 	jumbobarrel: {

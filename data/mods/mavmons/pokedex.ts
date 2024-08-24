@@ -13,7 +13,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		name: "Diantha",
 		types: ["Fairy"],
 		gender: "F",
-		baseStats: {hp: 100, atk: 85, def: 90, spa: 165, spd: 105, spe: 135},
+		baseStats: {hp: 100, atk: 80, def: 90, spa: 165, spd: 110, spe: 135},
 		abilities: {0: "Cute Charm"},
 		weightkg: 50,
 	},
@@ -23,7 +23,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		types: ["Electric", "Dark"],
 		gender: "M",
 		baseStats: {hp: 80, atk: 135, def: 95, spa: 130, spd: 89, spe: 151},
-		abilities: {0: "Anger Point", H: "Ben Mode"},
+		abilities: {0: "Anger Point", 1: "Harmful Mental", H: "Ben Mode"},
 		weightkg: 80,
 	},
 	benmode: {
@@ -35,6 +35,15 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
     	gender: "M",
 		baseStats: {hp: 80, atk: 151, def: 100, spa: 135, spd: 94, spe: 151},
 		abilities: {0: "Ben Mode"},
+		weightkg: 75,
+	},
+	zeya: {
+		num: 2003,
+		name: "Zeya",
+		types: ["Steel"],
+		gender: "M",
+		baseStats: {hp: 135, atk: 105, def: 110, spa: 95, spd: 110, spe: 110},
+		abilities: {0: "Battle Armor", 1: "Halal Trip", H: "Anticipated Strikes"},
 		weightkg: 75,
 	},
 };
