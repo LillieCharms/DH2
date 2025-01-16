@@ -35,6 +35,7 @@ const Formats = [
     desc: `Maverick* Mons, a micrometa designed to use Maverick* Server Fakemons.`,
     mod: "mavmons",
     teambuilderFormat: "National Dex",
+    unbanlist: ["lgpe"],
     ruleset: [
       "Standard NatDex",
       "OHKO Clause",
