@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../data/mods/data/mods/asodh/learnsets.ts"],
+  "sourcesContent": ["export const Learnsets: {[k: string]: LearnsetData} = {\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,YAAyC,CACtD;",
+  "names": []
+}

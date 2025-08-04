@@ -23,7 +23,7 @@ __export(abilities_exports, {
 module.exports = __toCommonJS(abilities_exports);
 const Abilities = {
   starstruckveil: {
-    shortDesc: "Heals 1/4 max HP when hit by a Fire move; Fire Immunity.  Hit by a Dark-type move raise Special Attack by 1. Ignore other abilities.",
+    shortDesc: "Fire type volt absorb. Special Justified. Ignore other abilities.",
     onTryHit(target, source, move) {
       if (target !== source && move.type === "Fire") {
         if (!this.heal(target.baseMaxhp / 4)) {
@@ -44,84 +44,89 @@ const Abilities = {
     rating: 3.5,
     num: -1
   },
-  puyomastery: {
-    shortDesc: "This Pokemon's Water moves have 1.5x power.",
-    onModifyAtkPriority: 5,
-    onModifyAtk(atk, attacker, defender, move) {
-      if (move.type === "Water") {
-        this.debug("Puyo Mastery boost");
-        return this.chainModify(1.5);
+  benmode: {
+    onResidualOrder: 29,
+    onResidual(pokemon) {
+      if (pokemon.baseSpecies.baseSpecies !== "Ben" || pokemon.transformed) {
+        return;
+      }
+      if (pokemon.hp <= pokemon.maxhp / 2 && !["Ben Mode"].includes(pokemon.species.forme)) {
+        pokemon.addVolatile("benmode");
+      } else if (pokemon.hp > pokemon.maxhp / 2 && ["Ben Mode"].includes(pokemon.species.forme)) {
+        pokemon.addVolatile("benmode");
+        pokemon.removeVolatile("benmode");
       }
     },
-    onModifySpAPriority: 5,
-    onModifySpA(atk, attacker, defender, move) {
-      if (move.type === "Water") {
-        this.debug("Puyo Mastery boost");
-        return this.chainModify(1.5);
+    onEnd(pokemon) {
+      if (!pokemon.volatiles["benmode"] || !pokemon.hp)
+        return;
+      pokemon.transformed = false;
+      delete pokemon.volatiles["benmode"];
+      if (pokemon.species.baseSpecies === "Ben" && pokemon.species.battleOnly) {
+        pokemon.formeChange(pokemon.species.battleOnly, this.effect, false, "[silent]");
       }
     },
-    name: "Puyo Mastery",
-    rating: 3.5,
+    condition: {
+      onEnd(pokemon) {
+        if (["Ben Mode"].includes(pokemon.species.forme)) {
+          pokemon.formeChange(pokemon.species.battleOnly);
+        }
+      }
+    },
+    flags: { failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1 },
+    name: "Ben Mode",
+    rating: 0,
     num: -2
   },
-  funkymode: {
-    shortDesc: "This Pokemon does not take damage from hazards.",
-    onDamage(damage, target, source, effect) {
-      if (effect && (effect.id === "stealthrock" || effect.id === "spikes")) {
-        return false;
+  harmfulmental: {
+    shortDesc: "The user\u2019s attacks are powered up by 20%, but they take 10% recoil after landing an attack.",
+    onModifyDamage(damage, source, target, move) {
+      return this.chainModify([1200, 1e3]);
+    },
+    onAfterMoveSecondarySelf(source, target, move) {
+      if (source && source !== target && move && move.category !== "Status" && !source.forceSwitchFlag) {
+        this.damage(source.baseMaxhp / 10, source, source, this.dex.items.get("lifeorb"));
       }
     },
-    name: "Funky Mode",
+    name: "Harmful Mental",
     rating: 4,
     num: -3
   },
-  runelord: {
-    shortDesc: "The Pok\xE9mon's special become physical, slicing, and contact.",
-    onModifyMove(move) {
-      if (move.category === "Special") {
-        if (!move.flags["contact"])
-          move.flags.contact = 1;
-        if (!move.flags["slicing"])
-          move.flags.slicing = 1;
-        move.category = "Physical";
-      }
+  halaltrip: {
+    shortDesc: "This Pok\xE9mon restores 3% of its HP at the end of every turn.",
+    onResidualOrder: 5,
+    onResidualSubOrder: 4,
+    onResidual(pokemon) {
+      this.heal(pokemon.baseMaxhp / 32);
     },
-    name: "Runelord",
+    name: "Halal Trip",
     rating: 3,
     num: -4
   },
-  torchofmadness: {
-    shortDesc: "This Pokemon's moves have 1.3x power against burned targets.",
-    onBasePower(basePower, attacker, defender, move) {
-      if (defender && ["brn"].includes(defender.status))
-        return this.chainModify(1.3);
+  anticipatedstrikes: {
+    shortDesc: "Deals 2.1x (instead of 1.5x) for STAB moves.",
+    onModifySTAB(stab, source, target, move) {
+      if (move.forceSTAB || source.hasType(move.type)) {
+        if (stab === 2) {
+          return 2.5;
+        }
+        return 2;
+      }
     },
-    name: "Torch of Madness",
+    name: "Anticipated Strikes",
     rating: 4,
     num: -5
   },
-  crystallize: {
-    shortDesc: "This Pokemon's Normal-type moves become Rock-type and have 1.2x power.",
+  cageddemon: {
+    shortDesc: "When the user is hit by a super effective attack, raises Atk/SpA by 2, lowers Def/SpD by 2, and the user slowly perishes. ",
     onModifyTypePriority: -1,
-    onModifyType(move, pokemon) {
-      const noModifyType = [
-        "judgment",
-        "multiattack",
-        "naturalgift",
-        "revelationdance",
-        "technoblast",
-        "terrainpulse",
-        "weatherball"
-      ];
-      if (move.type === "Normal" && !noModifyType.includes(move.id) && !(move.isZ && move.category !== "Status") && !(move.name === "Tera Blast" && pokemon.terastallized)) {
-        move.type = "Rock";
-        move.typeChangerBoosted = this.effect;
+    onTryHit(target, source, move) {
+      if (target !== source && move.type === "Poison", "Steel") {
+        if (!this.boost({ spa: 2, atk: 2, def: -2, spd: -2 }))
+          source.addVolatile("perishsong");
+        this.add("-start", source, "perish3", "[silent]");
+        return null;
       }
-    },
-    onBasePowerPriority: 23,
-    onBasePower(basePower, pokemon, target, move) {
-      if (move.typeChangerBoosted === this.effect)
-        return this.chainModify([4915, 4096]);
     },
     name: "Crystallize",
     rating: 4,

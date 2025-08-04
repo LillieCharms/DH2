@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../data/mods/mavmons/formats-data.ts"],
-  "sourcesContent": ["export const FormatsData: {[k: string]: SpeciesFormatsData} = {\r\n\tcharms: {\r\n\t\ttier: \"MV Ubers\",\r\n\t\tdoublesTier: \"DMV Ubers\",\r\n\t},\r\n\tdiantha: {\r\n\t\ttier: \"MV Ubers\",\r\n\t\tdoublesTier: \"DMV Ubers\",\r\n\t},\r\n\t\r\n};\r\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAiD;AAAA,EAC7D,QAAQ;AAAA,IACP,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,SAAS;AAAA,IACR,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAED;",
+  "sourcesContent": ["export const FormatsData: {[k: string]: SpeciesFormatsData} = {\n\tcharms: {\n\t\ttier: \"MV Ubers\",\n\t\tdoublesTier: \"DMV Ubers\",\n\t},\n\tdiantha: {\n\t\ttier: \"MV Ubers\",\n\t\tdoublesTier: \"DMV Ubers\",\n\t},\n\tben: {\n\t\ttier: \"MV Ubers\",\n\t\tdoublesTier: \"DMV Ubers\",\n\t},\n\tbenmode: {\n\t\ttier: \"MV Ubers\",\n\t\tdoublesTier: \"DMV Ubers\",\n\t},\n\tzeya: {\n\t\ttier: \"MV Ubers\",\n\t\tdoublesTier: \"DMV Ubers\",\n\t},\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,cAAiD;AAAA,EAC7D,QAAQ;AAAA,IACP,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,SAAS;AAAA,IACR,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,KAAK;AAAA,IACJ,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,SAAS;AAAA,IACR,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AAAA,EACA,MAAM;AAAA,IACL,MAAM;AAAA,IACN,aAAa;AAAA,EACd;AACD;",
   "names": []
 }

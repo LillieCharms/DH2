@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../data/mods/data/mods/asodh/abilities.ts"],
+  "sourcesContent": ["export const Abilities: { [abilityid: string]: ModdedAbilityData } = {\n\tcosmicenergy: {\n\t\tdesc: \"This Pok\u00E9mon can skip the charging turn of its moves.\",\n\t\tshortDesc: \"Skip charging turns of moves.\",\n\t\tonChargeMove(pokemon, target, move) {\n\t\t\tthis.debug('Solar Core - remove charge turn for ' + move.id);\n\t\t\tthis.attrLastMove('[still]');\n\t\t\tthis.addMove('-anim', pokemon, move.name, target);\n\t\t\treturn false; \n\t\t},\n\t\tname: \"Cosmic Energy\",\n\t\trating: 2,\n\t\tnum: -1,\n\t},\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,YAAwD;AAAA,EACpE,cAAc;AAAA,IACb,MAAM;AAAA,IACN,WAAW;AAAA,IACX,aAAa,SAAS,QAAQ,MAAM;AACnC,WAAK,MAAM,yCAAyC,KAAK,EAAE;AAC3D,WAAK,aAAa,SAAS;AAC3B,WAAK,QAAQ,SAAS,SAAS,KAAK,MAAM,MAAM;AAChD,aAAO;AAAA,IACR;AAAA,IACA,MAAM;AAAA,IACN,QAAQ;AAAA,IACR,KAAK;AAAA,EACN;AACD;",
+  "names": []
+}

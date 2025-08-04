@@ -43,6 +43,7 @@ const Moves = {
       }
       return move.basePower;
     },
+    volatileStatus: "smackdown",
     condition: {
       noCopy: true,
       onStart(pokemon2) {
@@ -96,12 +97,19 @@ const Moves = {
       this.attrLastMove("[still]");
       this.add("-anim", source2, "Surf", target2);
     },
+    onHit() {
+      this.field.clearTerrain();
+    },
+    onAfterSubDamage() {
+      this.field.clearTerrain();
+    },
     secondary: {
       chance: 100,
       boosts: {
         spe: -1
       }
     },
+    weather: "none",
     target: "allAdjacentFoes",
     type: "Water",
     contestType: "Cute"
@@ -134,7 +142,7 @@ const Moves = {
   marketingblast: {
     num: -4,
     accuracy: 100,
-    basePower: 95,
+    basePower: 90,
     category: "Special",
     shortDesc: "Sets up a layer of spikes.",
     name: "MARKETING BLAST",
@@ -174,6 +182,12 @@ const Moves = {
     onEffectiveness(typeMod, target2, type) {
       if (type === "Dragon")
         return 1;
+    },
+    onBasePower(basePower, source2, target2, move) {
+      if (target2.runEffectiveness(move) > 0) {
+        this.debug(`sublime heaven super effective buff`);
+        return this.chainModify([5461, 4096]);
+      }
     },
     secondary: null,
     target: "normal",
@@ -230,136 +244,312 @@ const Moves = {
     type: "Fairy",
     contestType: "Cute"
   },
-  dracoburning: {
+  ragingdemon: {
     num: -7,
-    accuracy: 90,
-    basePower: 105,
+    accuracy: 100,
+    basePower: 100,
     category: "Physical",
-    shortDesc: "Can hit Pokemon using Bounce, Fly, or Sky Drop.",
-    name: "Draco Burning",
+    shortDesc: "When you knock out a target using this move, you recover 1/4th of your max HP",
+    name: "Raging Demon",
     pp: 10,
     priority: 0,
     flags: { contact: 1, protect: 1, mirror: 1 },
     onPrepareHit(target2, source2, move) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Fire Blast", target2);
+      this.add("-anim", source2, "Wicked Blow", target2);
+    },
+    onAfterMoveSecondarySelf(pokemon2, target2, move) {
+      if (!target2 || target2.fainted || target2.hp <= 0)
+        this.heal(pokemon2.baseMaxhp / 4);
     },
     secondary: null,
     target: "normal",
-    type: "Fire",
+    type: "Dark",
     contestType: "Cool"
   },
-  frostkick: {
+  starsthatpiercetheheavens: {
     num: -8,
-    accuracy: 90,
-    basePower: 85,
-    category: "Physical",
-    shortDesc: "High critical hit ratio. 10% chance to freeze.",
-    name: "Frost Kick",
-    pp: 10,
-    priority: 0,
-    flags: { contact: 1, protect: 1, mirror: 1 },
-    critRatio: 2,
-    secondary: {
-      chance: 10,
-      status: "frz"
-    },
-    onPrepareHit(target2, source2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", source2, "Ice Hammer", target2);
-    },
-    target: "normal",
-    type: "Ice",
-    contestType: "Cool"
-  },
-  shockkick: {
-    num: -9,
-    accuracy: 90,
-    basePower: 85,
-    category: "Physical",
-    shortDesc: "High critical hit ratio. 10% chance to paralyze.",
-    name: "Shock Kick",
-    pp: 10,
-    priority: 0,
-    flags: { contact: 1, protect: 1, mirror: 1 },
-    critRatio: 2,
-    onPrepareHit(target2, source2, move) {
-      this.attrLastMove("[still]");
-      this.add("-anim", source2, "Thunderous Kick", target2);
-    },
-    secondary: {
-      chance: 10,
-      status: "par"
-    },
-    target: "normal",
-    type: "Electric",
-    contestType: "Cool"
-  },
-  greatfire: {
-    num: -10,
     accuracy: true,
     basePower: 200,
     category: "Special",
-    name: "Great Fire",
-    shortDesc: "Calculates damage using the user's Def instead of SpA.",
+    name: "Stars That Pierce The Heavens",
+    shortDesc: "Blocks healing and removes all hazards.",
     pp: 1,
     priority: 0,
     flags: {},
     onPrepareHit(target2, source2, move) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Inferno Overdrive", target2);
+      this.add("-anim", source2, "Light That Burns the Sky", target2);
     },
-    overrideOffensiveStat: "def",
-    isZ: "dracocentauriumz",
+    onHit(target2, source2, move) {
+      let success = false;
+      if (!target2.volatiles["substitute"] || move.infiltrates)
+        success = !!this.boost({ evasion: -1 });
+      const removeTarget = [
+        "reflect",
+        "lightscreen",
+        "auroraveil",
+        "safeguard",
+        "mist",
+        "spikes",
+        "toxicspikes",
+        "stealthrock",
+        "stickyweb",
+        "gmaxsteelsurge"
+      ];
+      const removeAll = [
+        "spikes",
+        "toxicspikes",
+        "stealthrock",
+        "stickyweb",
+        "gmaxsteelsurge"
+      ];
+      for (const targetCondition of removeTarget) {
+        if (target2.side.removeSideCondition(targetCondition)) {
+          if (!removeAll.includes(targetCondition))
+            continue;
+          this.add("-sideend", target2.side, this.dex.conditions.get(targetCondition).name, "[from] move: Defog", "[of] " + source2);
+          success = true;
+        }
+      }
+      for (const sideCondition of removeAll) {
+        if (source2.side.removeSideCondition(sideCondition)) {
+          this.add("-sideend", source2.side, this.dex.conditions.get(sideCondition).name, "[from] move: Defog", "[of] " + source2);
+          success = true;
+        }
+      }
+      this.field.clearTerrain();
+      return success;
+    },
+    volatileStatus: "healblock",
+    condition: {
+      duration: 5,
+      durationCallback(target2, source2, effect) {
+        if (effect?.name === "Psychic Noise") {
+          return 2;
+        }
+        if (source2?.hasAbility("persistent")) {
+          this.add("-activate", source2, "ability: Persistent", "[move] Heal Block");
+          return 7;
+        }
+        return 5;
+      },
+      onStart(pokemon2, source2) {
+        this.add("-start", pokemon2, "move: Heal Block");
+        source2.moveThisTurnResult = true;
+      },
+      onDisableMove(pokemon2) {
+        for (const moveSlot of pokemon2.moveSlots) {
+          if (this.dex.moves.get(moveSlot.id).flags["heal"]) {
+            pokemon2.disableMove(moveSlot.id);
+          }
+        }
+      },
+      onBeforeMovePriority: 6,
+      onBeforeMove(pokemon2, target2, move) {
+        if (move.flags["heal"] && !move.isZ && !move.isMax) {
+          this.add("cant", pokemon2, "move: Heal Block", move);
+          return false;
+        }
+      },
+      onModifyMove(move, pokemon2, target2) {
+        if (move.flags["heal"] && !move.isZ && !move.isMax) {
+          this.add("cant", pokemon2, "move: Heal Block", move);
+          return false;
+        }
+      },
+      onResidualOrder: 20,
+      onEnd(pokemon2) {
+        this.add("-end", pokemon2, "move: Heal Block");
+      },
+      onTryHeal(damage, target2, source2, effect) {
+        if (effect?.id === "zpower" || this.effectState.isZ)
+          return damage;
+        return false;
+      },
+      onRestart(target2, source2) {
+        this.add("-fail", target2, "move: Heal Block");
+        if (!source2.moveThisTurnResult) {
+          source2.moveThisTurnResult = false;
+        }
+      }
+    },
+    isZ: "starniumz",
     secondary: null,
     target: "normal",
-    type: "Fire",
+    type: "Fairy",
     contestType: "Beautiful"
   },
-  jumbobarrel: {
+  threehitstring: {
+    num: -9,
+    accuracy: true,
+    basePower: 90,
+    category: "Physical",
+    shortDesc: "High critical hit ratio. Ignore Abilities. Does not check accuracy.",
+    name: "Three Hit String",
+    pp: 10,
+    priority: 0,
+    flags: { contact: 1, protect: 1, mirror: 1 },
+    critRatio: 2,
+    onPrepareHit(target2, source2, move) {
+      this.attrLastMove("[still]");
+      this.add("-anim", source2, "Smart Strike", target2);
+    },
+    ignoreAbility: true,
+    target: "normal",
+    type: "Electric",
+    contestType: "Cool"
+  },
+  coins: {
+    num: -10,
+    accuracy: 100,
+    basePower: 30,
+    category: "Special",
+    name: "Great Fire",
+    shortDesc: "Calculates damage using the user's Def instead of SpA.",
+    pp: 15,
+    priority: -1,
+    flags: {},
+    onPrepareHit(target2, source2, move) {
+      this.attrLastMove("[still]");
+      this.add("-anim", source2, "Inferno Overdrive", target2);
+    },
+    self: {
+      onHit(source2) {
+        for (const side of source2.side.foeSidesWithConditions()) {
+          side.addSideCondition("gmaxsteelsurge");
+        }
+      }
+    },
+    condition: {
+      onSideStart(side) {
+        this.add("-sidestart", side, "move: G-Max Steelsurge");
+      },
+      onEntryHazard(pokemon2) {
+        if (pokemon2.hasItem("heavydutyboots"))
+          return;
+        const steelHazard = this.dex.getActiveMove("Stealth Rock");
+        steelHazard.type = "Steel";
+        const typeMod = this.clampIntRange(pokemon2.runEffectiveness(steelHazard), -6, 6);
+        this.damage(pokemon2.maxhp * Math.pow(2, typeMod) / 8);
+      }
+    },
+    onAfterHit(target2, pokemon2, move) {
+      if (!move.hasSheerForce) {
+        if (pokemon2.hp && pokemon2.removeVolatile("leechseed")) {
+          this.add("-end", pokemon2, "Leech Seed", "[from] move: Rapid Spin", "[of] " + pokemon2);
+        }
+        const sideConditions = ["spikes", "toxicspikes", "stealthrock", "stickyweb", "gmaxsteelsurge"];
+        for (const condition of sideConditions) {
+          if (pokemon2.hp && pokemon2.side.removeSideCondition(condition)) {
+            this.add("-sideend", pokemon2.side, this.dex.conditions.get(condition).name, "[from] move: Rapid Spin", "[of] " + pokemon2);
+          }
+        }
+        if (pokemon2.hp && pokemon2.volatiles["partiallytrapped"]) {
+          pokemon2.removeVolatile("partiallytrapped");
+        }
+      }
+    },
+    onAfterSubDamage(damage, target2, pokemon2, move) {
+      if (!move.hasSheerForce) {
+        if (pokemon2.hp && pokemon2.removeVolatile("leechseed")) {
+          this.add("-end", pokemon2, "Leech Seed", "[from] move: Rapid Spin", "[of] " + pokemon2);
+        }
+        const sideConditions = ["spikes", "toxicspikes", "stealthrock", "stickyweb", "gmaxsteelsurge"];
+        for (const condition of sideConditions) {
+          if (pokemon2.hp && pokemon2.side.removeSideCondition(condition)) {
+            this.add("-sideend", pokemon2.side, this.dex.conditions.get(condition).name, "[from] move: Rapid Spin", "[of] " + pokemon2);
+          }
+        }
+        if (pokemon2.hp && pokemon2.volatiles["partiallytrapped"]) {
+          pokemon2.removeVolatile("partiallytrapped");
+        }
+      }
+    },
+    secondary: null,
+    target: "normal",
+    type: "Steel",
+    contestType: "Beautiful"
+  },
+  callanuber: {
     num: -11,
     accuracy: 100,
-    basePower: 80,
+    basePower: 70,
     category: "Physical",
-    shortDesc: "30% chance to raise the user's Attack by 1. ",
-    name: "Jumbo Barrel",
-    pp: 15,
+    shortDesc: "User switches out.",
+    name: "Call an Uber",
+    pp: 20,
     priority: 0,
     flags: { bullet: 1, protect: 1, mirror: 1 },
     onPrepareHit(target2, source2, move) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Aeroblast", target2);
-      this.add("-anim", source2, "Quick Attack", target2);
+      this.add("-anim", source2, "Shift Gear", target2);
+      this.add("-anim", source2, "U-Turn", target2);
     },
-    secondary: {
-      chance: 30,
-      self: {
-        boosts: {
-          atk: 1
-        }
-      }
-    },
+    selfSwitch: true,
     target: "normal",
-    type: "Flying",
+    type: "Dark",
     contestType: "Cool"
   },
-  precisionstrikes: {
+  shockbubble: {
     num: -12,
     accuracy: 100,
     basePower: 100,
     category: "Physical",
-    shortDesc: "Heals 40% of the damage dealt.",
-    name: "Precision Strikes",
-    pp: 10,
-    priority: 0,
+    shortDesc: "Protects user, if a move is blocked sets up Electric Terrain.",
+    name: "Shock Bubble",
+    pp: 15,
+    priority: 4,
     flags: { contact: 1, slicing: 1, heal: 1, protect: 1, mirror: 1 },
-    onPrepareHit(target2, source2, move) {
+    onPrepareHit(target2, source2, pokemon2) {
       this.attrLastMove("[still]");
-      this.add("-anim", source2, "Slash", target2);
+      this.add("-anim", source2, "Tail Glow", target2);
+      this.add("-anim", source2, "Protect", target2);
+      return !!this.queue.willAct() && this.runEvent("StallMove", pokemon2);
     },
-    drain: [4, 10],
+    stallingMove: true,
+    volatileStatus: "shockbubble",
+    onHit(pokemon2) {
+      pokemon2.addVolatile("stall");
+    },
+    condition: {
+      duration: 1,
+      onStart(target2) {
+        this.add("-singleturn", target2, "move: Protect");
+      },
+      onTryHitPriority: 3,
+      onTryHit(target2, source2, move) {
+        if (!move.flags["protect"]) {
+          if (["gmaxoneblow", "gmaxrapidflow"].includes(move.id))
+            return;
+          if (move.isZ || move.isMax)
+            target2.getMoveHitData(move).zBrokeProtect = true;
+          return;
+        }
+        if (move.smartTarget) {
+          move.smartTarget = false;
+        } else {
+          this.add("-activate", target2, "move: Protect");
+        }
+        const lockedmove = source2.getVolatile("lockedmove");
+        if (lockedmove) {
+          if (source2.volatiles["lockedmove"].duration === 2) {
+            delete source2.volatiles["lockedmove"];
+          }
+        }
+        if (this.checkMoveMakesContact(move, source2, target2)) {
+          this.field.setTerrain("electricterrain");
+        }
+        return this.NOT_FAIL;
+      },
+      onHit(target2, source2, move) {
+        if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source2, target2)) {
+          this.field.setTerrain("electricterrain");
+        }
+      }
+    },
     target: "normal",
-    type: "Fighting",
+    type: "Electric",
     contestType: "Cool"
   },
   rudebuster: {

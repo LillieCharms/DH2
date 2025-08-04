@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../data/mods/data/mods/asodh/items.ts"],
+  "sourcesContent": ["export const Items: {[k: string]: ModdedItemData} = {\n\tstonjournerite: {\n\t\tname: \"Stonjournerite\",\n\t\tspritenum: 578,\n\t\tmegaStone: \"Stonjourner-Mega\",\n\t\tmegaEvolves: \"Stonjourner\",\n\t\titemUser: [\"Stonjourner\"],\n\t\tonTakeItem(item, source) {\n\t\t\tif (item.megaEvolves === source.baseSpecies.baseSpecies) return false;\n\t\t\treturn true;\n\t\t},\n\t\tnum: -1,\n\t\tgen: 9,\n\t\tdesc: \"If held by a Stonjourner, this item allows it to Mega Evolve in battle.\",\n\t},\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,QAAuC;AAAA,EACnD,gBAAgB;AAAA,IACf,MAAM;AAAA,IACN,WAAW;AAAA,IACX,WAAW;AAAA,IACX,aAAa;AAAA,IACb,UAAU,CAAC,aAAa;AAAA,IACxB,WAAW,MAAM,QAAQ;AACxB,UAAI,KAAK,gBAAgB,OAAO,YAAY;AAAa,eAAO;AAChE,aAAO;AAAA,IACR;AAAA,IACA,KAAK;AAAA,IACL,KAAK;AAAA,IACL,MAAM;AAAA,EACP;AACD;",
+  "names": []
+}
